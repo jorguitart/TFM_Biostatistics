@@ -1,5 +1,0 @@
-# This directory is a Syncthing folder marker.
-# Do not delete.
-
-folderID: rvq54-rjdes
-created: 2024-12-16T12:51:48+01:00

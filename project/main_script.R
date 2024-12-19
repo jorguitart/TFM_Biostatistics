@@ -9,3 +9,5 @@ library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
 
+####----MAIN CODE----####
+

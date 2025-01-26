@@ -6,13 +6,14 @@ library(ggplot2)
 library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = FALSE)
 library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
-library(Giotto) #remotes::install_github("drieslab/Giotto@main")
+library(Giotto) #remotes::install_github("drieslab/Giotto@master")
 
 ####--DIRECTORIES--####
 
 # Create save instructions
 instr <- createGiottoInstructions(save_dir = "./project/outcomes",
                                   save_plot = TRUE)
+
 
 # Create sample dirs
 dir <- "./project/material/GSE165098"
@@ -52,8 +53,8 @@ if (sum(is_mito == T) != 0) {
     } # 13 mitochondrial genes
 
 ## Histograms
-filterDistributions(s1, detection = "cells")
-filterDistributions(s1, detection = "genes")
+filterDistributions(s1, detection = "cells") # Genes detected per spot (?)
+filterDistributions(s1, detection = "genes") # Different genes detected in all cells (?)
 
 ## Tresholds
 filterCombinations(s1)

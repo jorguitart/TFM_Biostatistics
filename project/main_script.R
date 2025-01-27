@@ -7,6 +7,7 @@ library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = 
 library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 library(Giotto) #remotes::install_github("drieslab/Giotto@master")
+library(scran)
 
 ####--DIRECTORIES--####
 
@@ -53,8 +54,8 @@ if (sum(is_mito == T) != 0) {
     } # 13 mitochondrial genes
 
 ## Histograms
-filterDistributions(s1, detection = "cells") # Genes detected per spot (?)
-filterDistributions(s1, detection = "genes") # Different genes detected in all cells (?)
+filterDistributions(s1, detection = "cells", nr_bins = 100) # Total genes per spot (threshold = 0)
+filterDistributions(s1, detection = "genes", nr_bins = 100) # Genes detected per amount of spots
 
 ## Tresholds
 filterCombinations(s1)

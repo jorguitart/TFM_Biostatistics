@@ -33,7 +33,7 @@ spatPlot(s1, point_alpha = 0.6)
 
 # Quality control 
 ## Select over tissue genes
-
+in.tissue <- pDataDT(s1)[in_tissue == 1]$cell_ID
 if (sum((in.tissue == pDataDT(s1)$cell_ID) == F) == 0) {
   cat("All genes are over tissue")
 } else {
@@ -49,7 +49,7 @@ if (sum(is_mito == T) != 0) {
     } # 13 mitochondrial genes
 
 ## Histograms
-filterDistributions(s1, detection = "genes", nr_bins = 100) # Genes detected per spot (threshold = 0)
+filterDistributions(s1, detection = "cells", nr_bins = 100) # Genes detected per spot (threshold = 0)
 
 
 ## Tresholds

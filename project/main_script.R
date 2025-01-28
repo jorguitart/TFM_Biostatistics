@@ -8,26 +8,27 @@ library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 library(Giotto) #pak::pkg_install("drieslab/Giotto")
 
+
 ####--DIRECTORIES--####
 
-# Create save instructions
-instr <- createGiottoInstructions(save_dir = "./project/outcomes",
-                                  save_plot = T, show_plot = F)
-
-
-# Create sample dirs
 dir <- "./project/material/GSE165098"
 sample.ids <- c("LPS1", "LPS2", "LPS3", "saline1", "saline2", "saline3")
 sample.path <- file.path(dir, sample.ids)
 
+
 ####--SAMPLE 1--####
 
 # Obtain data
-s1 <- createGiottoVisiumObject(visium_dir = sample.path[1], #LPS1
-                               gene_column_index = 2, # Use gene symbols
-                               expr_data = "filter", # Use filtered data
-                               png_name = "tissue_lowres_image.png", # Lowres
-                               instructions = instr)
+s1 <- createGiottoVisiumObject(
+  visium_dir = sample.path[1], #LPS1
+  gene_column_index = 2, # Use gene symbols
+  expr_data = "filter", # Use filtered data
+  png_name = "tissue_lowres_image.png", # Select lowres image
+  instructions = createGiottoInstructions(
+    save_dir = "./project/outcomes/LPS1",
+    save_plot = T, show_plot = F))
+
+s1.matrix <- s1@expression[["cell"]][["rna"]][["raw"]]@exprMat # Extract expression matrix
 
 # Visualize spots
 s1.spots <- spatPlot(s1, point_alpha = 0.6, 
@@ -49,27 +50,41 @@ if (sum((in.tissue == pDataDT(s1)$cell_ID) == F) == 0) {
 ## Identify mitochondrial genes
 is_mito <- grepl("(^MT-)|(^mt-)", s1@feat_ID$rna)
 if (sum(is_mito == T) != 0) {
-  cat(sum(is_mito == T), "mitochondrial genes found:", which(is_mito == T))
+  s1@feat_ID$is_mito <- is_mito
+  s1.mito <- subsetGiotto(s1, feat_ids = s1@feat_ID$rna[is_mito == T])
+  cat(sum(is_mito == T), "mitochondrial genes found:", s1.mito@feat_ID$rna)
   rm(is_mito)
   } else {
     cat('No mitochondrial genes found')
     rm(is_mito)
     } # 13 mitochondrial genes found
 
-## Histograms
-### Detected genes per cell
+### Mito genes proportions
+s1.expr.sum <- apply(s1.matrix, 2, sum) # Sum of gene expression values per cell
+s1.mito.sum <- apply(s1.matrix[s1.mito@feat_ID$rna, ], 2, sum) # Sum of mito gene expression values per cell
+
+s1.mito.prop <- which(s1.mito.sum/s1.expr.sum > 0.28) # No cells exceed 0.28 mito genes proportion
+rm(s1.expr.sum, s1.mito.sum)
+
+## Plots
 s1.detected <- filterDistributions(s1, detection = "cells", nr_bins = 150,
-                                   method = "threshold",
+                                   method = "threshold", expression_threshold = 1, 
                                    default_save_name = "detected_genes")
-s1.detected
+s1.detected # Detected genes per cell, per sample
 
-### Library size
+
 s1.libsize <- filterDistributions(s1, detection = "cells", nr_bins = 150,
-                                  method = "sum",
+                                  method = "sum", 
                                   default_save_name = "library_size")
-s1.libsize
+s1.libsize # Library size, per sample
 
-## Tresholds
-s1.thresholds <- filterCombinations(s1, show_plot = F, 
+
+s1.thresholds <- filterCombinations(s1, expression_thresholds = c(1, 2, 3),
+                                    feat_det_in_min_cells = c(50, 50, 100, 100),
+                                    min_det_feats_per_cell = c(100, 250, 500, 1000), 
+                                    show_plot = F,
                                     default_save_name = "thresholds")
-s1.thresholds
+s1.thresholds # Threshold evaluation, per sample
+
+
+####--SAMPLE 2--####

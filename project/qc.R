@@ -92,7 +92,7 @@ s1.det.along <- filterDistributions(s1, detection = "feats", nr_bins = 50,
 ### Libsize vs Detected genes
 s1.libvdet <- ggplot(s1.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
-  xlab("Total reads per spot") + ylab("Detected genes per spot") +
+  xlab("total reads per spot") + ylab("detected genes per spot") +
   annotate("text", label = "Corr = 0.9355", x = 60000, y = 500)
 
 ### Threshold evaluation

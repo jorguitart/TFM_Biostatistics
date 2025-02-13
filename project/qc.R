@@ -97,17 +97,31 @@ s1.libvdet <- ggplot(s1.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha =
 
 ### Threshold evaluation
 s1.thresholds <- filterCombinations(s1, expression_thresholds = 1,
-                                    feat_det_in_min_cells = c(50, 100),
-                                    min_det_feats_per_cell = c(2500, 5000), 
+                                    feat_det_in_min_cells = c(50, 100, 50, 100),
+                                    min_det_feats_per_cell = c(2500, 2500, 5000, 5000), 
                                     show_plot = F,
                                     default_save_name = "thresholds")
 s1.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-s1.thresholds[["ggplot"]][["labels"]][["x"]] <- "Removed cells" # Adjust x axis label
-s1.thresholds[["ggplot"]][["labels"]][["y"]] <- "Removed genes" # Adjust y axis label
 
 s1.metric.plots <- ggarrange(s1.detected, s1.det.along, s1.libvdet, s1.thresholds$ggplot) # Combine all plots
 rm(s1.detected, s1.det.along, s1.libvdet, s1.thresholds); s1.metric.plots
-ggsave("./project/outcomes/LPS1_metrics.png", plot = s1.metric.plots, scale = 2 ,width = 1920, height = 1080, units = "px")
+ggsave("./project/outcomes/LPS1_metrics.png", plot = s1.metric.plots, scale = 2, width = 1920, height = 1080, units = "px")
+
+## Filter sample
+s1.filtered <- filterGiotto(s1, expression_values = "raw", expression_threshold = 1,
+                            feat_det_in_min_cells = 50,
+                            min_det_feats_per_cell = 2500)
+save(s1.filtered, file = "./project/filtered_samples/s1_filtered.R") # load("./project/filtered_samples/s1_filtered.R")
+
+## Deleted spots
+length(s1@cell_ID$cell) - length(s1.filtered@cell_ID$cell) # 243 deleted spots
+
+### Visualization plot
+spots.plot <- spatPlot2D(s1, cell_color = ("lightgrey"), point_size = 2,
+                         select_cells = s1.filtered@cell_ID$cell, # Select kept spots
+                         other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
+                         title = "Deleted spots (sample 1)"); spots.plot
+ggsave("./project/outcomes/LPS1_deleted.png", plot = spots.plot, scale = 2.5, width = 1920, height = 1080, units = "px")
 
 
-####--SAMPLE 2--####
+###--SAMPLE 2--####

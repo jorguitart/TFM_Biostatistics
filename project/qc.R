@@ -289,7 +289,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s3.mito) # Rm var
 which(s3.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
 
 ## Libsize vs Detected genes correlation
-with(s3.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9314)
+with(s3.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9584)
 
 
 ## Plots
@@ -307,12 +307,12 @@ s3.det.along <- filterDistributions(s3, detection = "feats", nr_bins = 50,
 s3.libvdet <- ggplot(s3.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = "Corr = 0.9314", x = 70000, y = 500)
+  annotate("text", label = "Corr = 0.9584", x = 60000, y = 500)
 
 ### Threshold evaluation
 s3.thresholds <- filterCombinations(s3, expression_thresholds = 1,
                                     feat_det_in_min_cells = c(50, 100, 50, 100),
-                                    min_det_feats_per_cell = c(3000, 3000, 4000, 4000), 
+                                    min_det_feats_per_cell = c(2500, 2500, 4000, 4000), 
                                     show_plot = F,
                                     default_save_name = "thresholds")
 s3.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -324,11 +324,11 @@ ggsave("./project/outcomes/LPS3_metrics.png", plot = s3.metric.plots, scale = 2,
 ## Filter sample
 s3.filtered <- filterGiotto(s3, expression_values = "raw", expression_threshold = 1,
                             feat_det_in_min_cells = 50,
-                            min_det_feats_per_cell = 3000)
+                            min_det_feats_per_cell = 2500)
 save(s3.filtered, file = "./project/material/filtered_samples/s3_filtered.R") # load("./project/filtered_samples/s3_filtered.R")
 
 ## Deleted spots
-length(s3@cell_ID$cell) - length(s3.filtered@cell_ID$cell) # 200 deleted spots
+length(s3@cell_ID$cell) - length(s3.filtered@cell_ID$cell) # 194 deleted spots
 
 ### Visualization plot
 s3.spots.plot <- spatPlot2D(s3, cell_color = ("lightgrey"), point_size = 2,
@@ -396,7 +396,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s4.mito) # Rm var
 which(s4.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
 
 ## Libsize vs Detected genes correlation
-with(s4.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9314)
+with(s4.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9574)
 
 
 ## Plots
@@ -414,7 +414,7 @@ s4.det.along <- filterDistributions(s4, detection = "feats", nr_bins = 50,
 s4.libvdet <- ggplot(s4.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = "Corr = 0.9314", x = 70000, y = 500)
+  annotate("text", label = "Corr = 0.9574", x = 60000, y = 500)
 
 ### Threshold evaluation
 s4.thresholds <- filterCombinations(s4, expression_thresholds = 1,
@@ -435,7 +435,7 @@ s4.filtered <- filterGiotto(s4, expression_values = "raw", expression_threshold 
 save(s4.filtered, file = "./project/material/filtered_samples/s4_filtered.R") # load("./project/filtered_samples/s4_filtered.R")
 
 ## Deleted spots
-length(s4@cell_ID$cell) - length(s4.filtered@cell_ID$cell) # 200 deleted spots
+length(s4@cell_ID$cell) - length(s4.filtered@cell_ID$cell) # 141 deleted spots
 
 ### Visualization plot
 s4.spots.plot <- spatPlot2D(s4, cell_color = ("lightgrey"), point_size = 2,
@@ -503,7 +503,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s5.mito) # Rm var
 which(s5.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
 
 ## Libsize vs Detected genes correlation
-with(s5.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9314)
+with(s5.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.93322)
 
 
 ## Plots
@@ -521,12 +521,12 @@ s5.det.along <- filterDistributions(s5, detection = "feats", nr_bins = 50,
 s5.libvdet <- ggplot(s5.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = "Corr = 0.9314", x = 70000, y = 500)
+  annotate("text", label = "Corr = 0.93322", x = 60000, y = 500)
 
 ### Threshold evaluation
 s5.thresholds <- filterCombinations(s5, expression_thresholds = 1,
                                     feat_det_in_min_cells = c(50, 100, 50, 100),
-                                    min_det_feats_per_cell = c(3000, 3000, 4000, 4000), 
+                                    min_det_feats_per_cell = c(150, 150, 250, 250), 
                                     show_plot = F,
                                     default_save_name = "thresholds")
 s5.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -538,11 +538,11 @@ ggsave("./project/outcomes/Saline2_metrics.png", plot = s5.metric.plots, scale =
 ## Filter sample
 s5.filtered <- filterGiotto(s5, expression_values = "raw", expression_threshold = 1,
                             feat_det_in_min_cells = 50,
-                            min_det_feats_per_cell = 3000)
+                            min_det_feats_per_cell = 150)
 save(s5.filtered, file = "./project/material/filtered_samples/s5_filtered.R") # load("./project/filtered_samples/s5_filtered.R")
 
 ## Deleted spots
-length(s5@cell_ID$cell) - length(s5.filtered@cell_ID$cell) # 200 deleted spots
+length(s5@cell_ID$cell) - length(s5.filtered@cell_ID$cell) # 148 deleted spots
 
 ### Visualization plot
 s5.spots.plot <- spatPlot2D(s5, cell_color = ("lightgrey"), point_size = 2,
@@ -610,7 +610,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s6.mito) # Rm var
 which(s6.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
 
 ## Libsize vs Detected genes correlation
-with(s6.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9314)
+with(s6.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9272)
 
 
 ## Plots
@@ -628,12 +628,12 @@ s6.det.along <- filterDistributions(s6, detection = "feats", nr_bins = 50,
 s6.libvdet <- ggplot(s6.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = "Corr = 0.9314", x = 70000, y = 500)
+  annotate("text", label = "Corr = 0.9272", x = 95000, y = 500)
 
 ### Threshold evaluation
 s6.thresholds <- filterCombinations(s6, expression_thresholds = 1,
                                     feat_det_in_min_cells = c(50, 100, 50, 100),
-                                    min_det_feats_per_cell = c(3000, 3000, 4000, 4000), 
+                                    min_det_feats_per_cell = c(1500, 1500, 2000, 2000), 
                                     show_plot = F,
                                     default_save_name = "thresholds")
 s6.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -645,11 +645,11 @@ ggsave("./project/outcomes/Saline3_metrics.png", plot = s6.metric.plots, scale =
 ## Filter sample
 s6.filtered <- filterGiotto(s6, expression_values = "raw", expression_threshold = 1,
                             feat_det_in_min_cells = 50,
-                            min_det_feats_per_cell = 3000)
+                            min_det_feats_per_cell = 1500)
 save(s6.filtered, file = "./project/material/filtered_samples/s6_filtered.R") # load("./project/filtered_samples/s6_filtered.R")
 
 ## Deleted spots
-length(s6@cell_ID$cell) - length(s6.filtered@cell_ID$cell) # 200 deleted spots
+length(s6@cell_ID$cell) - length(s6.filtered@cell_ID$cell) # 142 deleted spots
 
 ### Visualization plot
 s6.spots.plot <- spatPlot2D(s6, cell_color = ("lightgrey"), point_size = 2,

@@ -4,10 +4,10 @@ library(dplyr)
 library(tidyverse)
 library(ggplot2)
 library(ggpubr)
-library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = FALSE)
-library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
-library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 library(Giotto) #pak::pkg_install("drieslab/Giotto")
+# library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = FALSE)
+# library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
+# library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
 
 ####--DIRECTORIES--####
@@ -38,10 +38,6 @@ if (sum((in.tissue == pDataDT(s1)$cell_ID) == F) == 0) {
 } # All genes are over tissue
 
 s1.matrix <- s1@expression[["cell"]][["rna"]][["raw"]]@exprMat # Extract expression matrix from Giotto object
-
-
-# Visualize spots
-s1.spots <- spatPlot(s1, point_alpha = 0.6, default_save_name = "spots") # Save for later
 
 
 # Quality control 
@@ -147,10 +143,6 @@ if (sum((in.tissue == pDataDT(s2)$cell_ID) == F) == 0) {
 s2.matrix <- s2@expression[["cell"]][["rna"]][["raw"]]@exprMat # Extract expression matrix from Giotto object
 
 
-# Visualize spots
-s2.spots <- spatPlot(s2, point_alpha = 0.6, default_save_name = "spots") # Save for later
-
-
 # Quality control 
 ## Create cell metadata
 reads.depth <- apply(s2.matrix, 2, sum) # Reads per cell
@@ -252,10 +244,6 @@ if (sum((in.tissue == pDataDT(s3)$cell_ID) == F) == 0) {
 } # All genes are over tissue
 
 s3.matrix <- s3@expression[["cell"]][["rna"]][["raw"]]@exprMat # Extract expression matrix from Giotto object
-
-
-# Visualize spots
-s3.spots <- spatPlot(s3, point_alpha = 0.6, default_save_name = "spots") # Save for later
 
 
 # Quality control 
@@ -361,10 +349,6 @@ if (sum((in.tissue == pDataDT(s4)$cell_ID) == F) == 0) {
 s4.matrix <- s4@expression[["cell"]][["rna"]][["raw"]]@exprMat # Extract expression matrix from Giotto object
 
 
-# Visualize spots
-s4.spots <- spatPlot(s4, point_alpha = 0.6, default_save_name = "spots") # Save for later
-
-
 # Quality control 
 ## Create cell metadata
 reads.depth <- apply(s4.matrix, 2, sum) # Reads per cell
@@ -468,10 +452,6 @@ if (sum((in.tissue == pDataDT(s5)$cell_ID) == F) == 0) {
 s5.matrix <- s5@expression[["cell"]][["rna"]][["raw"]]@exprMat # Extract expression matrix from Giotto object
 
 
-# Visualize spots
-s5.spots <- spatPlot(s5, point_alpha = 0.6, default_save_name = "spots") # Save for later
-
-
 # Quality control 
 ## Create cell metadata
 reads.depth <- apply(s5.matrix, 2, sum) # Reads per cell
@@ -573,10 +553,6 @@ if (sum((in.tissue == pDataDT(s6)$cell_ID) == F) == 0) {
 } # All genes are over tissue
 
 s6.matrix <- s6@expression[["cell"]][["rna"]][["raw"]]@exprMat # Extract expression matrix from Giotto object
-
-
-# Visualize spots
-s6.spots <- spatPlot(s6, point_alpha = 0.6, default_save_name = "spots") # Save for later
 
 
 # Quality control 

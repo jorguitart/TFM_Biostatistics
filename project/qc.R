@@ -71,7 +71,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s1.mito) # Rm var
 which(s1.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
 
 ## Libsize vs Detected genes correlation
-with(s1.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9355)
+with(s1.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9584)
 
 
 ## Plots
@@ -89,7 +89,7 @@ s1.det.along <- filterDistributions(s1, detection = "feats", nr_bins = 50,
 s1.libvdet <- ggplot(s1.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = "Corr = 0.9355", x = 60000, y = 500)
+  annotate("text", label = "Corr = 0.9584", x = 60000, y = 500)
 
 ### Threshold evaluation
 s1.thresholds <- filterCombinations(s1, expression_thresholds = 1,
@@ -277,7 +277,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s3.mito) # Rm var
 which(s3.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
 
 ## Libsize vs Detected genes correlation
-with(s3.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9584)
+with(s3.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9353)
 
 
 ## Plots
@@ -295,7 +295,7 @@ s3.det.along <- filterDistributions(s3, detection = "feats", nr_bins = 50,
 s3.libvdet <- ggplot(s3.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = "Corr = 0.9584", x = 60000, y = 500)
+  annotate("text", label = "Corr = 0.9353", x = 60000, y = 500)
 
 ### Threshold evaluation
 s3.thresholds <- filterCombinations(s3, expression_thresholds = 1,
@@ -483,7 +483,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s5.mito) # Rm var
 which(s5.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
 
 ## Libsize vs Detected genes correlation
-with(s5.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.93322)
+with(s5.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9272)
 
 
 ## Plots
@@ -501,7 +501,7 @@ s5.det.along <- filterDistributions(s5, detection = "feats", nr_bins = 50,
 s5.libvdet <- ggplot(s5.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = "Corr = 0.93322", x = 60000, y = 500)
+  annotate("text", label = "Corr = 0.9272", x = 60000, y = 500)
 
 ### Threshold evaluation
 s5.thresholds <- filterCombinations(s5, expression_thresholds = 1,
@@ -586,7 +586,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s6.mito) # Rm var
 which(s6.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
 
 ## Libsize vs Detected genes correlation
-with(s6.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9272)
+with(s6.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9332)
 
 
 ## Plots
@@ -604,7 +604,7 @@ s6.det.along <- filterDistributions(s6, detection = "feats", nr_bins = 50,
 s6.libvdet <- ggplot(s6.cell.meta, aes(nReads, nGenes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = "Corr = 0.9272", x = 95000, y = 500)
+  annotate("text", label = "Corr = 0.9332", x = 95000, y = 500)
 
 ### Threshold evaluation
 s6.thresholds <- filterCombinations(s6, expression_thresholds = 1,

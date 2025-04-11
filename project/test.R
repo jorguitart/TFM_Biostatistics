@@ -68,7 +68,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s01.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s01.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
+which(s01.cell.meta$mitoProp > 0.1) # 108 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s01.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9850)
@@ -170,7 +170,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s02.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s02.cell.meta$mitoProp > 0.28) # 124 cells exceed 0.28 mito genes proportion
+which(s02.cell.meta$mitoProp > 0.1) # 3801 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s02.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9761)
@@ -272,7 +272,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s03.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s03.cell.meta$mitoProp > 0.28) # 84 cells exceed 0.28 mito genes proportion
+which(s03.cell.meta$mitoProp > 0.1) # 3546 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s03.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9796)
@@ -374,7 +374,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s04.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s04.cell.meta$mitoProp > 0.28) # 30 cells exceed 0.28 mito genes proportion
+which(s04.cell.meta$mitoProp > 0.1) # 2304 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s04.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9760)
@@ -476,7 +476,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s05.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s05.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
+which(s05.cell.meta$mitoProp > 0.1) # 3595 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s05.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9864)
@@ -578,7 +578,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s06.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s06.cell.meta$mitoProp > 0.28) # 19 cells exceed 0.28 mito genes proportion
+which(s06.cell.meta$mitoProp > 0.1) # 4315 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s06.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9912)
@@ -630,7 +630,7 @@ s06.spots.plot <- spatPlot2D(s06, cell_color = ("lightgrey"), point_size = 2,
 ggsave("./project/outcomes/ct06_deleted.png", plot = s06.spots.plot, scale = 2.5, width = 1920, height = 1080, units = "px")
 
 
-####--SAMPLE 07 (REVISAR!!!!)--####
+####--SAMPLE 07--####
 
 # Obtain data
 s07 <- createGiottoVisiumObject(
@@ -680,7 +680,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s07.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s07.cell.meta$mitoProp > 0.28) # 3824 cells exceed 0.28 mito genes proportion
+which(s07.cell.meta$mitoProp > 0.1) # 3858 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s07.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.8293)
@@ -782,7 +782,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s08.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s08.cell.meta$mitoProp > 0.28) # 4 cells exceed 0.28 mito genes proportion
+which(s08.cell.meta$mitoProp > 0.1) # 1972 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s08.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9827)
@@ -884,7 +884,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s09.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s09.cell.meta$mitoProp > 0.28) # 3 cells exceed 0.28 mito genes proportion
+which(s09.cell.meta$mitoProp > 0.1) # 1914 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s09.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9859)
@@ -936,7 +936,7 @@ s09.spots.plot <- spatPlot2D(s09, cell_color = ("lightgrey"), point_size = 2,
 ggsave("./project/outcomes/ms03_deleted.png", plot = s09.spots.plot, scale = 2.5, width = 1920, height = 1080, units = "px")
 
 
-####--SAMPLE 10 (REVISAR)--####
+####--SAMPLE 10--####
 
 # Obtain data
 s10 <- createGiottoVisiumObject(
@@ -986,7 +986,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s10.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s10.cell.meta$mitoProp > 0.28) # 1550 cells exceed 0.28 mito genes proportion
+which(s10.cell.meta$mitoProp > 0.1) # 3327 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s10.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9721)
@@ -1088,7 +1088,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s11.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s11.cell.meta$mitoProp > 0.28) # 28 cells exceed 0.28 mito genes proportion
+which(s11.cell.meta$mitoProp > 0.1) # 1578 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s11.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9861)
@@ -1190,7 +1190,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s12.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s12.cell.meta$mitoProp > 0.28) # 335 cells exceed 0.28 mito genes proportion
+which(s12.cell.meta$mitoProp > 0.1) # 1919 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s12.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9683)
@@ -1242,7 +1242,7 @@ s12.spots.plot <- spatPlot2D(s12, cell_color = ("lightgrey"), point_size = 2,
 ggsave("./project/outcomes/ms06_deleted.png", plot = s12.spots.plot, scale = 2.5, width = 1920, height = 1080, units = "px")
 
 
-####--SAMPLE 13 (REVISAR)--####
+####--SAMPLE 13--####
 
 # Obtain data
 s13 <- createGiottoVisiumObject(
@@ -1292,7 +1292,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s13.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s13.cell.meta$mitoProp > 0.28) # 2010 cells exceed 0.28 mito genes proportion
+which(s13.cell.meta$mitoProp > 0.1) # 4371 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s13.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9849)
@@ -1394,7 +1394,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s14.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s14.cell.meta$mitoProp > 0.28) # 48 cells exceed 0.28 mito genes proportion
+which(s14.cell.meta$mitoProp > 0.1) # 2336 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s14.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9844)
@@ -1496,7 +1496,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s15.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s15.cell.meta$mitoProp > 0.28) # No cells exceed 0.28 mito genes proportion
+which(s15.cell.meta$mitoProp > 0.1) # 1897 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s15.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9889)
@@ -1598,7 +1598,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s16.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s16.cell.meta$mitoProp > 0.28) # 117 cells exceed 0.28 mito genes proportion
+which(s16.cell.meta$mitoProp > 0.1) # 3242 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s16.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9855)
@@ -1650,7 +1650,7 @@ s16.spots.plot <- spatPlot2D(s16, cell_color = ("lightgrey"), point_size = 2,
 ggsave("./project/outcomes/ms10_deleted.png", plot = s16.spots.plot, scale = 2.5, width = 1920, height = 1080, units = "px")
 
 
-####--SAMPLE 17 (REVISAR)--####
+####--SAMPLE 17--####
 
 # Obtain data
 s17 <- createGiottoVisiumObject(
@@ -1700,7 +1700,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s17.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s17.cell.meta$mitoProp > 0.28) # 988 cells exceed 0.28 mito genes proportion
+which(s17.cell.meta$mitoProp > 0.1) # 3380 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s17.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9756)
@@ -1752,7 +1752,7 @@ s17.spots.plot <- spatPlot2D(s17, cell_color = ("lightgrey"), point_size = 2,
 ggsave("./project/outcomes/ms11_deleted.png", plot = s17.spots.plot, scale = 2.5, width = 1920, height = 1080, units = "px")
 
 
-####--SAMPLE 18 (REVISAR)--####
+####--SAMPLE 18--####
 
 # Obtain data
 s18 <- createGiottoVisiumObject(
@@ -1802,7 +1802,7 @@ rm(reads.depth, genes.per.cell, expr.sum, mito.sum, mito.prop, s18.mito) # Rm va
 
 ## Calcs
 ### Mito proportion threshold
-which(s18.cell.meta$mitoProp > 0.28) # 353 cells exceed 0.28 mito genes proportion
+which(s18.cell.meta$mitoProp > 0.1) # 2270 cells exceed 0.1 mito genes proportion
 
 ## Libsize vs Detected genes correlation
 with(s18.cell.meta, cor.test(nReads, nGenes)) # Check correlation (0.9901)

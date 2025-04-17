@@ -35,17 +35,27 @@ p01 <- ggarrange(p1, p2); rm(p1, p2); p01
 ## Calculate HVGs
 s01 <- calculateHVF(s01, expression_values = "normalized")
 
-## Run PCA
+## Run dim reduction
+### PCA
 s01 <- runPCA(s01, expression_values = "normalized", feats_to_use = "hvf")
+
+### UMAP
+s01 <- runUMAP(s01, dimensions_to_use = 1:6, n_components = 2)
+
+
+# Clustering
+s01 <- createNearestNetwork(s01, dimensions_to_use = 1:6)
+s01 <- doLeidenCluster(s01, name = "leiden_clus")
+
+# Plot dim reduction
+## PCA
 s01.pca <- plotPCA(s01); s01.pca
 
+### Cumulative variance explained
 s01.scree <- screePlot(s01, expression_values = "normalized", 
                        feats_to_use = "hvf", ncp = 50); s01.scree
 
-# Run UMAP
-s01 <- runUMAP(s01, dimensions_to_use = 1:10, n_components = 2)
-s01.umap <- plotUMAP(s01); s01.umap
-
-# Clustering
-s01 <- createNearestNetwork(s01, dimensions_to_use = 1:10)
-s01 <- doLeidenCluster(s01, name = "leiden_clus")
+## UMAP
+s01.umap <- plotUMAP(s01, cell_color = "leiden_clus", point_size = 2, 
+                     point_shape = "no_border", label_size = 0,
+                     title = "Clusters"); s01.umap

@@ -10,12 +10,17 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
 
-####--DIRECTORIES--####
+####--DIRECTORIES & INSTRUCTIONS--####
 
+# Directories
 dir <- "./project/material/GSE279181"
 sample.ids <- c("ct01", "ct02", "ct03", "ct04", "ct05", "ct06", 
                 "ms01", "ms02", "ms03", "ms04", "ms05", "ms06", "ms07", "ms08", "ms09", "ms10", "ms11", "ms12")
 sample.path <- file.path(dir, sample.ids); rm(dir, sample.ids)
+
+# Giotto instructions
+instr <- createGiottoInstructions(python_path = "C:/ProgramData/anaconda3/python.exe",
+                                  show_plot = F, save_plot = F)
 
 
 ####--SAMPLE 01--####
@@ -26,7 +31,7 @@ s01 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s01)[in_tissue == 1]$cell_ID 
@@ -128,7 +133,7 @@ s02 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s02)[in_tissue == 1]$cell_ID 
@@ -230,7 +235,7 @@ s03 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s03)[in_tissue == 1]$cell_ID 
@@ -332,7 +337,7 @@ s04 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s04)[in_tissue == 1]$cell_ID 
@@ -434,7 +439,7 @@ s05 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s05)[in_tissue == 1]$cell_ID 
@@ -536,7 +541,7 @@ s06 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s06)[in_tissue == 1]$cell_ID 
@@ -638,7 +643,7 @@ s07 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s07)[in_tissue == 1]$cell_ID 
@@ -740,7 +745,7 @@ s08 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s08)[in_tissue == 1]$cell_ID 
@@ -842,7 +847,7 @@ s09 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s09)[in_tissue == 1]$cell_ID 
@@ -944,7 +949,7 @@ s10 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s10)[in_tissue == 1]$cell_ID 
@@ -1046,7 +1051,7 @@ s11 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s11)[in_tissue == 1]$cell_ID 
@@ -1148,7 +1153,7 @@ s12 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s12)[in_tissue == 1]$cell_ID 
@@ -1250,7 +1255,7 @@ s13 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s13)[in_tissue == 1]$cell_ID 
@@ -1352,7 +1357,7 @@ s14 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s14)[in_tissue == 1]$cell_ID 
@@ -1445,7 +1450,7 @@ s14.spots.plot <- spatPlot2D(s14, cell_color = ("lightgrey"), point_size = 2,
                             title = "Deleted spots (sample 14)"); s14.spots.plot
 ggsave("./project/outcomes/qc/ms08_deleted.png", plot = s14.spots.plot, scale = 2.5, width = 1920, height = 1080, units = "px")
 
-
+ 
 ####--SAMPLE 15--####
 
 # Obtain data
@@ -1454,7 +1459,7 @@ s15 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s15)[in_tissue == 1]$cell_ID 
@@ -1556,7 +1561,7 @@ s16 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s16)[in_tissue == 1]$cell_ID 
@@ -1658,7 +1663,7 @@ s17 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s17)[in_tissue == 1]$cell_ID 
@@ -1760,7 +1765,7 @@ s18 <- createGiottoVisiumObject(
   gene_column_index = 2, # Use gene symbols
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
-  instructions = createGiottoInstructions(save_plot = F, show_plot = F))
+  instructions = instr)
 
 ## Filter over tissue genes
 in.tissue <- pDataDT(s18)[in_tissue == 1]$cell_ID 

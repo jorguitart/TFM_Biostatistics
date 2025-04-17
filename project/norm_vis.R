@@ -31,25 +31,21 @@ p2 <- spatPlot2D(s01, cell_color = "mito", color_as_factor = F)
 p01 <- ggarrange(p1, p2); rm(p1, p2); p01
 
 
-####--SAMPLE 02--####
+# HVGs - Dim reduction
+## Calculate HVGs
+s01 <- calculateHVF(s01, expression_values = "normalized")
 
-# Normalization
-load("./project/material/filtered_samples/s02_filtered.R") # Load data
-s02 <- normalizeGiotto(s02.filtered); s02; rm(s02.filtered)
+## Run PCA
+s01 <- runPCA(s01, expression_values = "normalized", feats_to_use = "hvf")
+s01.pca <- plotPCA(s01); s01.pca
 
-## Add statistics
-s02 <- addFeatStatistics(s02); s02 <- addCellStatistics(s02)
+s01.scree <- screePlot(s01, expression_values = "normalized", 
+                       feats_to_use = "hvf", ncp = 50); s01.scree
 
+# Run UMAP
+s01 <- runUMAP(s01, dimensions_to_use = 1:10, n_components = 2)
+s01.umap <- plotUMAP(s01); s01.umap
 
-# Visualization
-
-## Find mito genes percentatge per spot
-mito_genes <- grep("MT-", s02@feat_ID, value = T)
-s02 <- addFeatsPerc(s02, feats = mito_genes, vector_name = "mito"); rm(mito_genes)
-
-## Create plot
-p1 <- spatPlot2D(s02, cell_color = "nr_feats", color_as_factor = F)
-p2 <- spatPlot2D(s02, cell_color = "mito", color_as_factor = F)
-p02 <- ggarrange(p1, p2); rm(p1, p2); p02
-
-
+# Clustering
+s01 <- createNearestNetwork(s01, dimensions_to_use = 1:10)
+s01 <- doLeidenCluster(s01, name = "leiden_clus")

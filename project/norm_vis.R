@@ -12,24 +12,19 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 ####--SAMPLE 01--####
 
 # Normalization
-load("./project/material/filtered_samples/s01_filtered.R") # Load data
-s01 <- normalizeGiotto(s01.filtered); s01; rm(s01.filtered)
+s01 <- readRDS("./project/material/filtered_samples/s01_filtered.rds") # Load data
+s01 <- normalizeGiotto(s01); s01
 
 ## Add statistics
 s01 <- addFeatStatistics(s01); s01 <- addCellStatistics(s01)
 
 
 # Visualization
-
-## Find mito genes percentatge per spot
-mito_genes <- grep("MT-", s01@feat_ID, value = T)
-s01 <- addFeatsPerc(s01, feats = mito_genes, vector_name = "mito"); rm(mito_genes)
-
-## Create plot
 p1 <- spatPlot2D(s01, cell_color = "nr_feats", color_as_factor = F)
-p2 <- spatPlot2D(s01, cell_color = "mito", color_as_factor = F)
+p2 <- spatPlot2D(s01, cell_color = "mito_perc", color_as_factor = F)
 p01 <- ggarrange(p1, p2); rm(p1, p2); p01
 
+ggsave("./project/outcomes/vis/s01.png", plot = p01, scale = 3, width = 1920, height = 1080, units = "px")
 
 # HVGs - Dim reduction
 ## Calculate HVGs

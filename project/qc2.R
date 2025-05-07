@@ -10,7 +10,7 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
 
-####--DIRECTORIES & INSTRUCTIONS--####
+####--DIRs & INSTRUCTIONS--####
 
 # Directories
 dir <- "./project/material/GSE279181"
@@ -89,10 +89,10 @@ s01.nm.libvdet <- ggplot(s01.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(al
 
 ### Threshold evaluation
 s01.nm.thresholds <- filterCombinations(s01.nm, expression_thresholds = 1,
-                                    feat_det_in_min_cells = c(50, 100, 50, 100),
-                                    min_det_feats_per_cell = c(500, 500, 1000, 1000), 
-                                    show_plot = F,
-                                    default_save_name = "thresholds")
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
+                                        show_plot = F,
+                                        default_save_name = "thresholds")
 s01.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
 
 s01.nm.metric.plots <- ggarrange(s01.nm.detected, s01.nm.det.along, 
@@ -103,7 +103,7 @@ ggsave("./project/outcomes/qc/ct01_metrics.png", plot = s01.nm.metric.plots,
 
 ## Filter sample
 s01.filtered <- filterGiotto(s01.nm, expression_values = "raw", expression_threshold = 1,
-                            feat_det_in_min_cells = 50,
+                            feat_det_in_min_cells = 2,
                             min_det_feats_per_cell = 1000)
 saveRDS(s01.filtered, file = "./project/material/filtered_samples/s01_filtered.rds") # readRDS()
 
@@ -180,12 +180,12 @@ s02.nm.det.along <- filterDistributions(s02.nm, detection = "feats", nr_bins = 5
 s02.nm.libvdet <- ggplot(s02.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s02.cor), x = 11000, y = 0); rm(s02.cor)
+  annotate("text", label = paste0("Corr = ", s02.cor), x = 20000, y = 0); rm(s02.cor)
 
 ### Threshold evaluation
 s02.nm.thresholds <- filterCombinations(s02.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s02.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -198,12 +198,12 @@ ggsave("./project/outcomes/qc/ct02_metrics.png", plot = s02.nm.metric.plots,
 
 ## Filter sample
 s02.filtered <- filterGiotto(s02.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 750)
 saveRDS(s02.filtered, file = "./project/material/filtered_samples/s02_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s02@cell_ID$cell) - length(s02.filtered@cell_ID$cell) # 525 deleted spots
+length(s02@cell_ID$cell) - length(s02.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s02.spots.plot <- spatPlot2D(s02, cell_color = ("lightgrey"), point_size = 2,
@@ -275,12 +275,12 @@ s03.nm.det.along <- filterDistributions(s03.nm, detection = "feats", nr_bins = 5
 s03.nm.libvdet <- ggplot(s03.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s03.cor), x = 11000, y = 0); rm(s03.cor)
+  annotate("text", label = paste0("Corr = ", s03.cor), x = 18000, y = 0); rm(s03.cor)
 
 ### Threshold evaluation
 s03.nm.thresholds <- filterCombinations(s03.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s03.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -293,12 +293,12 @@ ggsave("./project/outcomes/qc/ct03_metrics.png", plot = s03.nm.metric.plots,
 
 ## Filter sample
 s03.filtered <- filterGiotto(s03.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 500)
 saveRDS(s03.filtered, file = "./project/material/filtered_samples/s03_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s03@cell_ID$cell) - length(s03.filtered@cell_ID$cell) # 525 deleted spots
+length(s03@cell_ID$cell) - length(s03.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s03.spots.plot <- spatPlot2D(s03, cell_color = ("lightgrey"), point_size = 2,
@@ -370,12 +370,12 @@ s04.nm.det.along <- filterDistributions(s04.nm, detection = "feats", nr_bins = 5
 s04.nm.libvdet <- ggplot(s04.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s04.cor), x = 11000, y = 0); rm(s04.cor)
+  annotate("text", label = paste0("Corr = ", s04.cor), x = 25000, y = 0); rm(s04.cor)
 
 ### Threshold evaluation
 s04.nm.thresholds <- filterCombinations(s04.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s04.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -388,12 +388,12 @@ ggsave("./project/outcomes/qc/ct04_metrics.png", plot = s04.nm.metric.plots,
 
 ## Filter sample
 s04.filtered <- filterGiotto(s04.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
+                             feat_det_in_min_cells = 2,
                              min_det_feats_per_cell = 1000)
 saveRDS(s04.filtered, file = "./project/material/filtered_samples/s04_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s04@cell_ID$cell) - length(s04.filtered@cell_ID$cell) # 525 deleted spots
+length(s04@cell_ID$cell) - length(s04.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s04.spots.plot <- spatPlot2D(s04, cell_color = ("lightgrey"), point_size = 2,
@@ -465,12 +465,12 @@ s05.nm.det.along <- filterDistributions(s05.nm, detection = "feats", nr_bins = 5
 s05.nm.libvdet <- ggplot(s05.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s05.cor), x = 11000, y = 0); rm(s05.cor)
+  annotate("text", label = paste0("Corr = ", s05.cor), x = 13000, y = 0); rm(s05.cor)
 
 ### Threshold evaluation
 s05.nm.thresholds <- filterCombinations(s05.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s05.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -483,12 +483,12 @@ ggsave("./project/outcomes/qc/ct05_metrics.png", plot = s05.nm.metric.plots,
 
 ## Filter sample
 s05.filtered <- filterGiotto(s05.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 500)
 saveRDS(s05.filtered, file = "./project/material/filtered_samples/s05_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s05@cell_ID$cell) - length(s05.filtered@cell_ID$cell) # 525 deleted spots
+length(s05@cell_ID$cell) - length(s05.filtered@cell_ID$cell)
 
 ### Visualization plot
 s05.spots.plot <- spatPlot2D(s05, cell_color = ("lightgrey"), point_size = 2,
@@ -560,12 +560,12 @@ s06.nm.det.along <- filterDistributions(s06.nm, detection = "feats", nr_bins = 5
 s06.nm.libvdet <- ggplot(s06.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s06.cor), x = 11000, y = 0); rm(s06.cor)
+  annotate("text", label = paste0("Corr = ", s06.cor), x = 9000, y = 0); rm(s06.cor)
 
 ### Threshold evaluation
 s06.nm.thresholds <- filterCombinations(s06.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s06.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -578,12 +578,12 @@ ggsave("./project/outcomes/qc/ct06_metrics.png", plot = s06.nm.metric.plots,
 
 ## Filter sample
 s06.filtered <- filterGiotto(s06.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 250)
 saveRDS(s06.filtered, file = "./project/material/filtered_samples/s06_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s06@cell_ID$cell) - length(s06.filtered@cell_ID$cell) # 525 deleted spots
+length(s06@cell_ID$cell) - length(s06.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s06.spots.plot <- spatPlot2D(s06, cell_color = ("lightgrey"), point_size = 2,
@@ -593,7 +593,7 @@ s06.spots.plot <- spatPlot2D(s06, cell_color = ("lightgrey"), point_size = 2,
 ggsave("./project/outcomes/qc/ct06_deleted.png", plot = s06.spots.plot, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
-####--SAMPLE 07--####
+####--SAMPLE 07 [DELETE]--####
 
 # Obtain data
 s07 <- createGiottoVisiumObject(
@@ -603,9 +603,9 @@ s07 <- createGiottoVisiumObject(
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
 
-# Quality control 
+# Quality control
 ## Filter over tissue genes
-in.tissue <- pDataDT(s07)[in_tissue == 1]$cell_ID 
+in.tissue <- pDataDT(s07)[in_tissue == 1]$cell_ID
 if (sum((in.tissue == pDataDT(s07)$cell_ID) == F) == 0) {
   cat("All genes are over tissue")
   rm(in.tissue)
@@ -629,63 +629,63 @@ low.mito <- s07.meta$mito_perc <= 28
 s07.nm <- s07[, low.mito]; rm(low.mito)
 
 ## Create cell metadata
-s07.nm.matrix <- getExpression(s07.nm, values = "raw", output = "matrix") 
+s07.nm.matrix <- getExpression(s07.nm, values = "raw", output = "matrix")
 reads.depth <- apply(s07.nm.matrix, 2, sum) # Reads per cell
 genes.per.cell <- apply(s07.nm.matrix != 0, 2, sum) # Detected genes per cell
 s07.nm.meta <- pDataDT(s07.nm)
 s07.nm.meta$n_reads <- as.numeric(reads.depth); s07.nm.meta$n_genes <- as.numeric(genes.per.cell)
-rm(s07.nm.matrix, reads.depth, genes.per.cell) 
+rm(s07.nm.matrix, reads.depth, genes.per.cell)
 
 ### Libsize vs Detected genes correlation
-s07.cor <- as.numeric(round(with(s07.nm.meta, cor.test(n_reads, n_genes))$estimate, 4)) 
+s07.cor <- as.numeric(round(with(s07.nm.meta, cor.test(n_reads, n_genes))$estimate, 4))
 
 
 ## Plots
 ### Detected genes
 s07.nm.detected <- filterDistributions(s07.nm, detection = "cells", nr_bins = 50,
-                                       method = "threshold", expression_threshold = 1, 
+                                       method = "threshold", expression_threshold = 1,
                                        default_save_name = "detected_genes")
 
 ### Genes detection along cells
 s07.nm.det.along <- filterDistributions(s07.nm, detection = "feats", nr_bins = 50,
-                                        method = "threshold", 
+                                        method = "threshold",
                                         default_save_name = "library_size")
 
 ### Libsize vs Detected genes
 s07.nm.libvdet <- ggplot(s07.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
-  theme_classic() + theme(legend.position = "none") + 
+  theme_classic() + theme(legend.position = "none") +
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s07.cor), x = 11000, y = 0); rm(s07.cor)
+  annotate("text", label = paste0("Corr = ", s07.cor), x = 9000, y = 0); rm(s07.cor)
 
 ### Threshold evaluation
 s07.nm.thresholds <- filterCombinations(s07.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000),
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s07.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
 
-s07.nm.metric.plots <- ggarrange(s07.nm.detected, s07.nm.det.along, 
+s07.nm.metric.plots <- ggarrange(s07.nm.detected, s07.nm.det.along,
                                  s07.nm.libvdet, s07.nm.thresholds$ggplot) # Combine all plots
 rm(s07.nm.detected, s07.nm.det.along, s07.nm.libvdet, s07.nm.thresholds); s07.nm.metric.plots
-ggsave("./project/outcomes/qc/ms01_metrics.png", plot = s07.nm.metric.plots, 
+ggsave("./project/outcomes/qc/ms01_metrics.png", plot = s07.nm.metric.plots,
        scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s07.filtered <- filterGiotto(s07.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
+                             feat_det_in_min_cells = 2,
                              min_det_feats_per_cell = 1000)
 saveRDS(s07.filtered, file = "./project/material/filtered_samples/s07_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s07@cell_ID$cell) - length(s07.filtered@cell_ID$cell) # 525 deleted spots
+length(s07@cell_ID$cell) - length(s07.filtered@cell_ID$cell)
 
 ### Visualization plot
 s07.spots.plot <- spatPlot2D(s07, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s07.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
                              title = "Deleted spots (sample 7)"); s07.spots.plot
-ggsave("./project/outcomes/qc/ms01_deleted.png", plot = s07.spots.plot, 
+ggsave("./project/outcomes/qc/ms01_deleted.png", plot = s07.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 08--####
@@ -750,12 +750,12 @@ s08.nm.det.along <- filterDistributions(s08.nm, detection = "feats", nr_bins = 5
 s08.nm.libvdet <- ggplot(s08.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s08.cor), x = 11000, y = 0); rm(s08.cor)
+  annotate("text", label = paste0("Corr = ", s08.cor), x = 22000, y = 0); rm(s08.cor)
 
 ### Threshold evaluation
 s08.nm.thresholds <- filterCombinations(s08.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s08.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -768,12 +768,12 @@ ggsave("./project/outcomes/qc/ms02_metrics.png", plot = s08.nm.metric.plots,
 
 ## Filter sample
 s08.filtered <- filterGiotto(s08.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 125)
 saveRDS(s08.filtered, file = "./project/material/filtered_samples/s08_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s08@cell_ID$cell) - length(s08.filtered@cell_ID$cell) # 525 deleted spots
+length(s08@cell_ID$cell) - length(s08.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s08.spots.plot <- spatPlot2D(s08, cell_color = ("lightgrey"), point_size = 2,
@@ -845,12 +845,12 @@ s09.nm.det.along <- filterDistributions(s09.nm, detection = "feats", nr_bins = 5
 s09.nm.libvdet <- ggplot(s09.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s09.cor), x = 11000, y = 0); rm(s09.cor)
+  annotate("text", label = paste0("Corr = ", s09.cor), x = 17000, y = 0); rm(s09.cor)
 
 ### Threshold evaluation
 s09.nm.thresholds <- filterCombinations(s09.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s09.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -863,12 +863,12 @@ ggsave("./project/outcomes/qc/ms03_metrics.png", plot = s09.nm.metric.plots,
 
 ## Filter sample
 s09.filtered <- filterGiotto(s09.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 250)
 saveRDS(s09.filtered, file = "./project/material/filtered_samples/s09_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s09@cell_ID$cell) - length(s09.filtered@cell_ID$cell) # 525 deleted spots
+length(s09@cell_ID$cell) - length(s09.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s09.spots.plot <- spatPlot2D(s09, cell_color = ("lightgrey"), point_size = 2,
@@ -878,7 +878,7 @@ s09.spots.plot <- spatPlot2D(s09, cell_color = ("lightgrey"), point_size = 2,
 ggsave("./project/outcomes/qc/ms03_deleted.png", plot = s09.spots.plot, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
-####--SAMPLE 10--####
+####--SAMPLE 10 [DELETE]--####
 
 # Obtain data
 s10 <- createGiottoVisiumObject(
@@ -940,12 +940,12 @@ s10.nm.det.along <- filterDistributions(s10.nm, detection = "feats", nr_bins = 5
 s10.nm.libvdet <- ggplot(s10.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s10.cor), x = 11000, y = 0); rm(s10.cor)
+  annotate("text", label = paste0("Corr = ", s10.cor), x = 17000, y = 0); rm(s10.cor)
 
 ### Threshold evaluation
 s10.nm.thresholds <- filterCombinations(s10.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s10.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -958,12 +958,12 @@ ggsave("./project/outcomes/qc/ms04_metrics.png", plot = s10.nm.metric.plots,
 
 ## Filter sample
 s10.filtered <- filterGiotto(s10.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 250)
 saveRDS(s10.filtered, file = "./project/material/filtered_samples/s10_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s10@cell_ID$cell) - length(s10.filtered@cell_ID$cell) # 525 deleted spots
+length(s10@cell_ID$cell) - length(s10.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s10.spots.plot <- spatPlot2D(s10, cell_color = ("lightgrey"), point_size = 2,
@@ -1035,12 +1035,12 @@ s11.nm.det.along <- filterDistributions(s11.nm, detection = "feats", nr_bins = 5
 s11.nm.libvdet <- ggplot(s11.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s11.cor), x = 11000, y = 0); rm(s11.cor)
+  annotate("text", label = paste0("Corr = ", s11.cor), x = 20000, y = 0); rm(s11.cor)
 
 ### Threshold evaluation
 s11.nm.thresholds <- filterCombinations(s11.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s11.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -1053,12 +1053,12 @@ ggsave("./project/outcomes/qc/ms05_metrics.png", plot = s11.nm.metric.plots,
 
 ## Filter sample
 s11.filtered <- filterGiotto(s11.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 125)
 saveRDS(s11.filtered, file = "./project/material/filtered_samples/s11_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s11@cell_ID$cell) - length(s11.filtered@cell_ID$cell) # 525 deleted spots
+length(s11@cell_ID$cell) - length(s11.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s11.spots.plot <- spatPlot2D(s11, cell_color = ("lightgrey"), point_size = 2,
@@ -1130,12 +1130,12 @@ s12.nm.det.along <- filterDistributions(s12.nm, detection = "feats", nr_bins = 5
 s12.nm.libvdet <- ggplot(s12.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s12.cor), x = 11000, y = 0); rm(s12.cor)
+  annotate("text", label = paste0("Corr = ", s12.cor), x = 17000, y = 0); rm(s12.cor)
 
 ### Threshold evaluation
 s12.nm.thresholds <- filterCombinations(s12.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s12.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -1148,12 +1148,12 @@ ggsave("./project/outcomes/qc/ms06_metrics.png", plot = s12.nm.metric.plots,
 
 ## Filter sample
 s12.filtered <- filterGiotto(s12.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 250)
 saveRDS(s12.filtered, file = "./project/material/filtered_samples/s12_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s12@cell_ID$cell) - length(s12.filtered@cell_ID$cell) # 525 deleted spots
+length(s12@cell_ID$cell) - length(s12.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s12.spots.plot <- spatPlot2D(s12, cell_color = ("lightgrey"), point_size = 2,
@@ -1163,7 +1163,7 @@ s12.spots.plot <- spatPlot2D(s12, cell_color = ("lightgrey"), point_size = 2,
 ggsave("./project/outcomes/qc/ms06_deleted.png", plot = s12.spots.plot, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
-####--SAMPLE 13--####
+####--SAMPLE 13 [DELETE]--####
 
 # Obtain data
 s13 <- createGiottoVisiumObject(
@@ -1225,12 +1225,12 @@ s13.nm.det.along <- filterDistributions(s13.nm, detection = "feats", nr_bins = 5
 s13.nm.libvdet <- ggplot(s13.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s13.cor), x = 11000, y = 0); rm(s13.cor)
+  annotate("text", label = paste0("Corr = ", s13.cor), x = 17000, y = 0); rm(s13.cor)
 
 ### Threshold evaluation
 s13.nm.thresholds <- filterCombinations(s13.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s13.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -1243,12 +1243,12 @@ ggsave("./project/outcomes/qc/ms07_metrics.png", plot = s13.nm.metric.plots,
 
 ## Filter sample
 s13.filtered <- filterGiotto(s13.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 250)
 saveRDS(s13.filtered, file = "./project/material/filtered_samples/s13_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s13@cell_ID$cell) - length(s13.filtered@cell_ID$cell) # 525 deleted spots
+length(s13@cell_ID$cell) - length(s13.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s13.spots.plot <- spatPlot2D(s13, cell_color = ("lightgrey"), point_size = 2,
@@ -1320,12 +1320,12 @@ s14.nm.det.along <- filterDistributions(s14.nm, detection = "feats", nr_bins = 5
 s14.nm.libvdet <- ggplot(s14.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s14.cor), x = 11000, y = 0); rm(s14.cor)
+  annotate("text", label = paste0("Corr = ", s14.cor), x = 14000, y = 0); rm(s14.cor)
 
 ### Threshold evaluation
 s14.nm.thresholds <- filterCombinations(s14.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s14.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -1338,12 +1338,12 @@ ggsave("./project/outcomes/qc/ms08_metrics.png", plot = s14.nm.metric.plots,
 
 ## Filter sample
 s14.filtered <- filterGiotto(s14.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 500)
 saveRDS(s14.filtered, file = "./project/material/filtered_samples/s14_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s14@cell_ID$cell) - length(s14.filtered@cell_ID$cell) # 525 deleted spots
+length(s14@cell_ID$cell) - length(s14.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s14.spots.plot <- spatPlot2D(s14, cell_color = ("lightgrey"), point_size = 2,
@@ -1415,12 +1415,12 @@ s15.nm.det.along <- filterDistributions(s15.nm, detection = "feats", nr_bins = 5
 s15.nm.libvdet <- ggplot(s15.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s15.cor), x = 11000, y = 0); rm(s15.cor)
+  annotate("text", label = paste0("Corr = ", s15.cor), x = 9000, y = 0); rm(s15.cor)
 
 ### Threshold evaluation
 s15.nm.thresholds <- filterCombinations(s15.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s15.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -1433,12 +1433,12 @@ ggsave("./project/outcomes/qc/ms09_metrics.png", plot = s15.nm.metric.plots,
 
 ## Filter sample
 s15.filtered <- filterGiotto(s15.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 500)
 saveRDS(s15.filtered, file = "./project/material/filtered_samples/s15_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s15@cell_ID$cell) - length(s15.filtered@cell_ID$cell) # 525 deleted spots
+length(s15@cell_ID$cell) - length(s15.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s15.spots.plot <- spatPlot2D(s15, cell_color = ("lightgrey"), point_size = 2,
@@ -1510,12 +1510,12 @@ s16.nm.det.along <- filterDistributions(s16.nm, detection = "feats", nr_bins = 5
 s16.nm.libvdet <- ggplot(s16.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s16.cor), x = 11000, y = 0); rm(s16.cor)
+  annotate("text", label = paste0("Corr = ", s16.cor), x = 9000, y = 0); rm(s16.cor)
 
 ### Threshold evaluation
 s16.nm.thresholds <- filterCombinations(s16.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s16.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -1528,12 +1528,12 @@ ggsave("./project/outcomes/qc/ms10_metrics.png", plot = s16.nm.metric.plots,
 
 ## Filter sample
 s16.filtered <- filterGiotto(s16.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 500)
 saveRDS(s16.filtered, file = "./project/material/filtered_samples/s16_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s16@cell_ID$cell) - length(s16.filtered@cell_ID$cell) # 525 deleted spots
+length(s16@cell_ID$cell) - length(s16.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s16.spots.plot <- spatPlot2D(s16, cell_color = ("lightgrey"), point_size = 2,
@@ -1605,12 +1605,12 @@ s17.nm.det.along <- filterDistributions(s17.nm, detection = "feats", nr_bins = 5
 s17.nm.libvdet <- ggplot(s17.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s17.cor), x = 11000, y = 0); rm(s17.cor)
+  annotate("text", label = paste0("Corr = ", s17.cor), x = 30000, y = 0); rm(s17.cor)
 
 ### Threshold evaluation
 s17.nm.thresholds <- filterCombinations(s17.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s17.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -1623,12 +1623,12 @@ ggsave("./project/outcomes/qc/ms11_metrics.png", plot = s17.nm.metric.plots,
 
 ## Filter sample
 s17.filtered <- filterGiotto(s17.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 500)
 saveRDS(s17.filtered, file = "./project/material/filtered_samples/s17_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s17@cell_ID$cell) - length(s17.filtered@cell_ID$cell) # 525 deleted spots
+length(s17@cell_ID$cell) - length(s17.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s17.spots.plot <- spatPlot2D(s17, cell_color = ("lightgrey"), point_size = 2,
@@ -1700,12 +1700,12 @@ s18.nm.det.along <- filterDistributions(s18.nm, detection = "feats", nr_bins = 5
 s18.nm.libvdet <- ggplot(s18.nm.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s18.cor), x = 11000, y = 0); rm(s18.cor)
+  annotate("text", label = paste0("Corr = ", s18.cor), x = 13000, y = 0); rm(s18.cor)
 
 ### Threshold evaluation
 s18.nm.thresholds <- filterCombinations(s18.nm, expression_thresholds = 1,
-                                        feat_det_in_min_cells = c(50, 100, 50, 100),
-                                        min_det_feats_per_cell = c(500, 500, 1000, 1000), 
+                                        feat_det_in_min_cells = rep(2, 4),
+                                        min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                         show_plot = F,
                                         default_save_name = "thresholds")
 s18.nm.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
@@ -1718,12 +1718,12 @@ ggsave("./project/outcomes/qc/ms12_metrics.png", plot = s18.nm.metric.plots,
 
 ## Filter sample
 s18.filtered <- filterGiotto(s18.nm, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = 50,
-                             min_det_feats_per_cell = 1000)
+                             feat_det_in_min_cells = 2,
+                             min_det_feats_per_cell = 250)
 saveRDS(s18.filtered, file = "./project/material/filtered_samples/s18_filtered.rds") # readRDS()
 
 ## Deleted spots
-length(s18@cell_ID$cell) - length(s18.filtered@cell_ID$cell) # 525 deleted spots
+length(s18@cell_ID$cell) - length(s18.filtered@cell_ID$cell) 
 
 ### Visualization plot
 s18.spots.plot <- spatPlot2D(s18, cell_color = ("lightgrey"), point_size = 2,
@@ -1732,3 +1732,46 @@ s18.spots.plot <- spatPlot2D(s18, cell_color = ("lightgrey"), point_size = 2,
                              title = "Deleted spots (sample 18)"); s18.spots.plot
 ggsave("./project/outcomes/qc/ms12_deleted.png", plot = s18.spots.plot, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
+
+####--MERGE--####
+# 
+# # Add metadata
+# ## ct
+# s01.merge <- addCellMetadata(s01.filtered, new_metadata = "ct", vector_name = "condition")
+# s01.merge <- addCellMetadata(s01.merge, new_metadata = "s01", vector_name = "sample_id")
+# s02.merge <- addCellMetadata(s02.filtered, new_metadata = "ct", vector_name = "condition")
+# s02.merge <- addCellMetadata(s02.merge, new_metadata = "s02", vector_name = "sample_id")
+# s03.merge <- addCellMetadata(s03.filtered, new_metadata = "ct", vector_name = "condition")
+# s03.merge <- addCellMetadata(s03.merge, new_metadata = "s03", vector_name = "sample_id")
+# s04.merge <- addCellMetadata(s04.filtered, new_metadata = "ct", vector_name = "condition")
+# s04.merge <- addCellMetadata(s04.merge, new_metadata = "s04", vector_name = "sample_id")
+# s05.merge <- addCellMetadata(s05.filtered, new_metadata = "ct", vector_name = "condition")
+# s05.merge <- addCellMetadata(s05.merge, new_metadata = "s05", vector_name = "sample_id")
+# s06.merge <- addCellMetadata(s06.filtered, new_metadata = "ct", vector_name = "condition")
+# s06.merge <- addCellMetadata(s06.merge, new_metadata = "s06", vector_name = "sample_id")
+# 
+# ## ms
+# s07.merge <- addCellMetadata(s07.filtered, new_metadata = "ms", vector_name = "condition")
+# s07.merge <- addCellMetadata(s07.merge, new_metadata = "s07", vector_name = "sample_id")
+# s08.merge <- addCellMetadata(s08.filtered, new_metadata = "ms", vector_name = "condition")
+# s08.merge <- addCellMetadata(s08.merge, new_metadata = "s08", vector_name = "sample_id")
+# s09.merge <- addCellMetadata(s09.filtered, new_metadata = "ms", vector_name = "condition")
+# s09.merge <- addCellMetadata(s09.merge, new_metadata = "s09", vector_name = "sample_id")
+# s10.merge <- addCellMetadata(s10.filtered, new_metadata = "ms", vector_name = "condition")
+# s10.merge <- addCellMetadata(s10.merge, new_metadata = "s10", vector_name = "sample_id")
+# s11.merge <- addCellMetadata(s11.filtered, new_metadata = "ms", vector_name = "condition")
+# s11.merge <- addCellMetadata(s11.merge, new_metadata = "s11", vector_name = "sample_id")
+# s12.merge <- addCellMetadata(s12.filtered, new_metadata = "ms", vector_name = "condition")
+# s12.merge <- addCellMetadata(s12.merge, new_metadata = "s12", vector_name = "sample_id")
+# s13.merge <- addCellMetadata(s13.filtered, new_metadata = "ms", vector_name = "condition")
+# s13.merge <- addCellMetadata(s13.merge, new_metadata = "s13", vector_name = "sample_id")
+# s14.merge <- addCellMetadata(s14.filtered, new_metadata = "ms", vector_name = "condition")
+# s14.merge <- addCellMetadata(s14.merge, new_metadata = "s14", vector_name = "sample_id")
+# s15.merge <- addCellMetadata(s15.filtered, new_metadata = "ms", vector_name = "condition")
+# s15.merge <- addCellMetadata(s15.merge, new_metadata = "s15", vector_name = "sample_id")
+# s16.merge <- addCellMetadata(s16.filtered, new_metadata = "ms", vector_name = "condition")
+# s16.merge <- addCellMetadata(s16.merge, new_metadata = "s16", vector_name = "sample_id")
+# s17.merge <- addCellMetadata(s17.filtered, new_metadata = "ms", vector_name = "condition")
+# s17.merge <- addCellMetadata(s17.merge, new_metadata = "s17", vector_name = "sample_id")
+# s18.merge <- addCellMetadata(s18.filtered, new_metadata = "ms", vector_name = "condition")
+# s18.merge <- addCellMetadata(s18.merge, new_metadata = "s18", vector_name = "sample_id")

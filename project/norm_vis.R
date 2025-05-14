@@ -9,48 +9,48 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 # library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
-####--SAMPLE 01--####
+####--SAMPLE--####
 
 # Normalization
-s01 <- readRDS("./project/material/filtered_samples/s01_filtered.rds") # Load data
-s01 <- normalizeGiotto(s01); s01
+merged.samples <- readRDS("./project/material/filtered_samples/merge.rds") # Load data
+merged.samples <- normalizeGiotto(merged.samples); merged.samples
 
 ## Add statistics
-s01 <- addFeatStatistics(s01); s01 <- addCellStatistics(s01)
+merged.samples <- addFeatStatistics(merged.samples); merged.samples <- addCellStatistics(merged.samples)
 
 
-# Visualization
-p1 <- spatPlot2D(s01, cell_color = "nr_feats", color_as_factor = F)
-p2 <- spatPlot2D(s01, cell_color = "mito_perc", color_as_factor = F)
-p01 <- ggarrange(p1, p2); rm(p1, p2); p01
-
-ggsave("./project/outcomes/vis/s01.png", plot = p01, scale = 3, width = 1920, height = 1080, units = "px")
+# # Visualization
+# p1 <- spatPlot2D(s01, cell_color = "nr_feats", color_as_factor = F)
+# p2 <- spatPlot2D(s01, cell_color = "mito_perc", color_as_factor = F)
+# p01 <- ggarrange(p1, p2); rm(p1, p2); p01
+# 
+# ggsave("./project/outcomes/vis/s01.png", plot = p01, scale = 3, width = 1920, height = 1080, units = "px")
 
 # HVGs - Dim reduction
 ## Calculate HVGs
-s01 <- calculateHVF(s01, expression_values = "normalized")
+merged.samples <- calculateHVF(merged.samples, expression_values = "normalized")
 
 ## Run dim reduction
 ### PCA
-s01 <- runPCA(s01, expression_values = "normalized", feats_to_use = "hvf")
+merged.samples <- runPCA(merged.samples, expression_values = "normalized", feats_to_use = "hvf", ncp = 50)
 
 ### UMAP
-s01 <- runUMAP(s01, dimensions_to_use = 1:6, n_components = 2)
+merged.samples <- runUMAP(merged.samples, dimensions_to_use = 1:7, n_components = 2)
 
 
 # Clustering
-s01 <- createNearestNetwork(s01, dimensions_to_use = 1:6)
-s01 <- doLeidenCluster(s01, name = "leiden_clus")
+merged.samples <- createNearestNetwork(merged.samples, dimensions_to_use = 1:7)
+merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resolution = 0.25)
 
 # Plot dim reduction
 ## PCA
-s01.pca <- plotPCA(s01); s01.pca
+merged.pca <- plotPCA(merged.samples); merged.pca
 
 ### Cumulative variance explained
-s01.scree <- screePlot(s01, expression_values = "normalized", 
-                       feats_to_use = "hvf", ncp = 50); s01.scree
+merge.scree <- screePlot(merged.samples, expression_values = "normalized",
+                       feats_to_use = "hvf", ncp = 50); merge.scree
 
 ## UMAP
-s01.umap <- plotUMAP(s01, cell_color = "leiden_clus", point_size = 2, 
+merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 2,
                      point_shape = "no_border", label_size = 0,
-                     title = "Clusters"); s01.umap
+                     title = "Clusters"); merge.umap

@@ -51,16 +51,22 @@ merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resoluti
 
 # Plot dim reduction
 ## PCA
-merged.pca <- plotPCA(merged.samples); merged.pca
+merged.pca <- plotPCA(merged.samples)
+png(filename = "./project/outcomes/vis/pca.png", width = 40, height = 20, units = "cm", res = 1080)
+merged.pca; dev.off()
 
 ### Cumulative variance explained
 merge.scree <- screePlot(merged.samples, expression_values = "normalized",
-                       feats_to_use = "hvf", ncp = 50); merge.scree
+                       feats_to_use = "hvf", ncp = 50)
+png(filename = "./project/outcomes/vis/scree.png", width = 40, height = 20, units = "cm", res = 1080)
+merge.scree; dev.off()
 
 ## UMAP
 merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 2,
                      point_shape = "no_border", label_size = 0,
-                     title = "Clusters"); merge.umap
+                     title = "Clusters")
+png(filename = "./project/outcomes/vis/umap.png", width = 40, height = 20, units = "cm", res = 1080)
+merge.umap; dev.off()
 
 
 # Timer stop

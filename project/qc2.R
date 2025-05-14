@@ -1,5 +1,4 @@
 ####--LIBRARIES--####
-
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
@@ -11,8 +10,7 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 
 
 ####--DIRs & INSTRUCTIONS--####
-
-# Directories
+#Directories
 dir <- "./project/material/GSE279181"
 sam <- c("ct01", "ct02", "ct03", "ct04", "ct05", "ct06", 
          "ms01", "ms02", "ms03", "ms04", "ms05", "ms06", "ms07", "ms08", "ms09", "ms10", "ms11", "ms12")
@@ -24,7 +22,6 @@ instr <- createGiottoInstructions(python_path = "C:/ProgramData/anaconda3/python
 
 
 ####--SAMPLE 01--####
-
 # Obtain data
 s01 <- createGiottoVisiumObject(
   visium_dir = sample.path[1], #ct01
@@ -119,7 +116,6 @@ ggsave("./project/outcomes/qc/ct01_deleted.png", plot = s01.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 02--####
-
 # Obtain data
 s02 <- createGiottoVisiumObject(
   visium_dir = sample.path[2], #ct02
@@ -214,7 +210,6 @@ ggsave("./project/outcomes/qc/ct02_deleted.png", plot = s02.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 03--####
-
 # Obtain data
 s03 <- createGiottoVisiumObject(
   visium_dir = sample.path[3], #ct03
@@ -309,7 +304,6 @@ ggsave("./project/outcomes/qc/ct03_deleted.png", plot = s03.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 04--####
-
 # Obtain data
 s04 <- createGiottoVisiumObject(
   visium_dir = sample.path[4], #ct04
@@ -404,7 +398,6 @@ ggsave("./project/outcomes/qc/ct04_deleted.png", plot = s04.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 05--####
-
 # Obtain data
 s05 <- createGiottoVisiumObject(
   visium_dir = sample.path[5], #ct05
@@ -499,7 +492,6 @@ ggsave("./project/outcomes/qc/ct05_deleted.png", plot = s05.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 06--####
-
 # Obtain data
 s06 <- createGiottoVisiumObject(
   visium_dir = sample.path[6], #ct06
@@ -594,7 +586,6 @@ ggsave("./project/outcomes/qc/ct06_deleted.png", plot = s06.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 07 [DELETE]--####
-
 # Obtain data
 s07 <- createGiottoVisiumObject(
   visium_dir = sample.path[7], #ms01
@@ -689,7 +680,6 @@ ggsave("./project/outcomes/qc/ms01_deleted.png", plot = s07.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 08--####
-
 # Obtain data
 s08 <- createGiottoVisiumObject(
   visium_dir = sample.path[8], #ms02
@@ -784,7 +774,6 @@ ggsave("./project/outcomes/qc/ms02_deleted.png", plot = s08.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 09--####
-
 # Obtain data
 s09 <- createGiottoVisiumObject(
   visium_dir = sample.path[9], #ms03
@@ -879,7 +868,6 @@ ggsave("./project/outcomes/qc/ms03_deleted.png", plot = s09.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 10 [DELETE]--####
-
 # Obtain data
 s10 <- createGiottoVisiumObject(
   visium_dir = sample.path[10], #ms04
@@ -974,7 +962,6 @@ ggsave("./project/outcomes/qc/ms04_deleted.png", plot = s10.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 11--####
-
 # Obtain data
 s11 <- createGiottoVisiumObject(
   visium_dir = sample.path[11], #ms05
@@ -1069,7 +1056,6 @@ ggsave("./project/outcomes/qc/ms05_deleted.png", plot = s11.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 12--####
-
 # Obtain data
 s12 <- createGiottoVisiumObject(
   visium_dir = sample.path[12], #ms06
@@ -1164,7 +1150,6 @@ ggsave("./project/outcomes/qc/ms06_deleted.png", plot = s12.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 13 [DELETE]--####
-
 # Obtain data
 s13 <- createGiottoVisiumObject(
   visium_dir = sample.path[13], #ms07
@@ -1259,7 +1244,6 @@ ggsave("./project/outcomes/qc/ms07_deleted.png", plot = s13.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 14--####
-
 # Obtain data
 s14 <- createGiottoVisiumObject(
   visium_dir = sample.path[14], #ms08
@@ -1354,7 +1338,6 @@ ggsave("./project/outcomes/qc/ms08_deleted.png", plot = s14.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 15--####
-
 # Obtain data
 s15 <- createGiottoVisiumObject(
   visium_dir = sample.path[15], #ms09
@@ -1449,7 +1432,6 @@ ggsave("./project/outcomes/qc/ms09_deleted.png", plot = s15.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 16--####
-
 # Obtain data
 s16 <- createGiottoVisiumObject(
   visium_dir = sample.path[16], #ms10
@@ -1544,7 +1526,6 @@ ggsave("./project/outcomes/qc/ms10_deleted.png", plot = s16.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 17--####
-
 # Obtain data
 s17 <- createGiottoVisiumObject(
   visium_dir = sample.path[17], #ms11
@@ -1639,7 +1620,6 @@ ggsave("./project/outcomes/qc/ms11_deleted.png", plot = s17.spots.plot,
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 18--####
-
 # Obtain data
 s18 <- createGiottoVisiumObject(
   visium_dir = sample.path[18], #ms12

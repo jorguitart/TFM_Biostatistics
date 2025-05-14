@@ -42,31 +42,26 @@ merged.samples <- calculateHVF(merged.samples, expression_values = "normalized")
 merged.samples <- runPCA(merged.samples, expression_values = "normalized", feats_to_use = "hvf", ncp = 50)
 
 ### UMAP
-merged.samples <- runUMAP(merged.samples, dimensions_to_use = 1:7, n_components = 2)
+merged.samples <- runUMAP(merged.samples, dimensions_to_use = 1:7, n_components = 2, feats_to_use = "hvf")
 
 
 # Clustering
-merged.samples <- createNearestNetwork(merged.samples, dimensions_to_use = 1:7)
+merged.samples <- createNearestNetwork(merged.samples, dimensions_to_use = 1:7, feats_to_use = "hvf")
 merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resolution = 0.25)
 
 # Plot dim reduction
 ## PCA
-merged.pca <- plotPCA(merged.samples)
-png(filename = "./project/outcomes/vis/pca.png", width = 40, height = 20, units = "cm", res = 1080)
-merged.pca; dev.off()
+merged.pca <- plotPCA(merged.samples); merged.pca
+
 
 ### Cumulative variance explained
 merge.scree <- screePlot(merged.samples, expression_values = "normalized",
-                       feats_to_use = "hvf", ncp = 50)
-png(filename = "./project/outcomes/vis/scree.png", width = 40, height = 20, units = "cm", res = 1080)
-merge.scree; dev.off()
+                       feats_to_use = "hvf", ncp = 50); merge.scree
+
 
 ## UMAP
 merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 2,
-                     point_shape = "no_border", label_size = 0,
-                     title = "Clusters")
-png(filename = "./project/outcomes/vis/umap.png", width = 40, height = 20, units = "cm", res = 1080)
-merge.umap; dev.off()
+                     point_shape = "no_border", label_size = 0, title = ""); merge.umap
 
 
 # Timer stop

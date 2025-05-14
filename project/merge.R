@@ -64,7 +64,7 @@ comb.meta <- do.call(rbind, meta.list)
 # Create and save gobject
 merged.samples <- createGiottoObject(
   expression = comb.matrix, spatial_locs = comb.coords, cell_metadata = comb.meta, 
-  instructions = createGiottoInstructions(python_path = "C:/ProgramData/anaconda3/python.exe"))
+  instructions = createGiottoInstructions(python_path = "C:/ProgramData/anaconda3/python.exe", show_plot = F))
 
 saveRDS(merged.samples, file = "./project/material/filtered_samples/merge.rds")
 

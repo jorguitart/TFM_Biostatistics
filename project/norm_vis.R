@@ -14,6 +14,7 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # Normalization
 s01 <- readRDS("./project/material/filtered_samples/s01_filtered.rds") # Sample 01
 s01 <- normalizeGiotto(s01); s01
+
 merged.samples <- readRDS("./project/material/filtered_samples/merge.rds") # Merged data
 merged.samples <- normalizeGiotto(merged.samples); merged.samples
 

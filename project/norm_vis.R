@@ -12,19 +12,23 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 ####--SAMPLE--####
 
 # Normalization
-merged.samples <- readRDS("./project/material/filtered_samples/merge.rds") # Load data
+s01 <- readRDS("./project/material/filtered_samples/s01_filtered.rds") # Sample 01
+s01 <- normalizeGiotto(s01); s01
+merged.samples <- readRDS("./project/material/filtered_samples/merge.rds") # Merged data
 merged.samples <- normalizeGiotto(merged.samples); merged.samples
 
 ## Add statistics
+s01 <- addFeatStatistics(s01); s01 <- addCellStatistics(s01)
 merged.samples <- addFeatStatistics(merged.samples); merged.samples <- addCellStatistics(merged.samples)
 
 
-# # Visualization
-# p1 <- spatPlot2D(s01, cell_color = "nr_feats", color_as_factor = F)
-# p2 <- spatPlot2D(s01, cell_color = "mito_perc", color_as_factor = F)
-# p01 <- ggarrange(p1, p2); rm(p1, p2); p01
-# 
-# ggsave("./project/outcomes/vis/s01.png", plot = p01, scale = 3, width = 1920, height = 1080, units = "px")
+# Visualization
+p1 <- spatPlot2D(s01, cell_color = "nr_feats", color_as_factor = F)
+p2 <- spatPlot2D(s01, cell_color = "mito_perc", color_as_factor = F)
+p01 <- ggarrange(p1, p2); rm(p1, p2); p01
+
+ggsave("./project/outcomes/vis/s01.png", plot = p01, scale = 3, width = 1920, height = 1080, units = "px")
+
 
 # HVGs - Dim reduction
 ## Calculate HVGs

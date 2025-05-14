@@ -64,4 +64,4 @@ merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 
 
 
 # Timer stop
-Sys.time() - t0
+t1 <- Sys.time() - t0; t1

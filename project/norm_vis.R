@@ -11,6 +11,10 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 
 ####--SAMPLE--####
 
+# Timer start
+t0 <- Sys.time()
+
+
 # Normalization
 s01 <- readRDS("./project/material/filtered_samples/s01_filtered.rds") # Sample 01
 s01 <- normalizeGiotto(s01); s01
@@ -59,3 +63,7 @@ merge.scree <- screePlot(merged.samples, expression_values = "normalized",
 merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 2,
                      point_shape = "no_border", label_size = 0,
                      title = "Clusters"); merge.umap
+
+
+# Timer stop
+t1 <- Sys.time() - t0; t1

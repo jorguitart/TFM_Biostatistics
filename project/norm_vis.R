@@ -14,7 +14,7 @@ t0 <- Sys.time()
 
 
 # Normalization
-s01 <- readRDS("./project/material/filtered_samples/s01_filtered.rds") # Sample 01
+s01 <- readRDS("./project/material/filtered_samples/s01_filtered.rds") # Sample 01 (example)
 s01 <- normalizeGiotto(s01); s01
 
 merged.samples <- readRDS("./project/material/filtered_samples/merge.rds") # Merged data
@@ -39,24 +39,27 @@ merged.samples <- calculateHVF(merged.samples, expression_values = "normalized")
 
 ## Run dim reduction
 ### PCA
-merged.samples <- runPCA(merged.samples, expression_values = "normalized", feats_to_use = "hvf", ncp = 50)
+merged.samples <- runPCA(merged.samples, expression_values = "normalized", feats_to_use = "hvf", ncp = 50,
+                         name = "pca")
 
 ### UMAP
-merged.samples <- runUMAP(merged.samples, dimensions_to_use = 1:7, n_components = 2, feats_to_use = "hvf")
+merged.samples <- runUMAP(merged.samples, dimensions_to_use = 1:7, n_components = 2, 
+                          dim_reduction_name = "pca", feats_to_use = "hvf")
 
 
 # Clustering
-merged.samples <- createNearestNetwork(merged.samples, dimensions_to_use = 1:7, feats_to_use = "hvf")
+merged.samples <- createNearestNetwork(merged.samples, dimensions_to_use = 1:7, feats_to_use = "hvf", 
+                                       dim_reduction_name = "pca", name = "sNN.pca")
 merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resolution = 0.25)
 
 # Plot dim reduction
 ## PCA
-merged.pca <- plotPCA(merged.samples); merged.pca
+merged.pca <- plotPCA(merged.samples, dim_reduction_name = "pca"); merged.pca
 
 
 ### Cumulative variance explained
 merge.scree <- screePlot(merged.samples, expression_values = "normalized",
-                       feats_to_use = "hvf", ncp = 50); merge.scree
+                         dim_reduction_name = "pca", feats_to_use = "hvf", ncp = 50); merge.scree
 
 
 ## UMAP
@@ -64,5 +67,8 @@ merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 
                      point_shape = "no_border", label_size = 0, title = ""); merge.umap
 
 
-# Timer stop
+# Save sample
+saveRDS(merged.samples, file = "./project/material/filtered_samples/merge_norm.rds")
+
+## Timer stop
 t1 <- Sys.time() - t0; t1

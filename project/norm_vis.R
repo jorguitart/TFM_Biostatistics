@@ -50,7 +50,9 @@ merged.samples <- runUMAP(merged.samples, dimensions_to_use = 1:7, n_components 
 # Clustering
 merged.samples <- createNearestNetwork(merged.samples, dimensions_to_use = 1:7, feats_to_use = "hvf", 
                                        dim_reduction_name = "pca", name = "sNN.pca")
-merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resolution = 0.25)
+merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resolution = 0.25) # Leiden
+merged.samples <- doKmeans(merged.samples, name = "km_clus", expression_values = "normalized", 
+                           feats_to_use = "hvf", return_gobject = T) # KMeans
 
 # Plot dim reduction
 ## PCA
@@ -63,7 +65,7 @@ merge.scree <- screePlot(merged.samples, expression_values = "normalized",
 
 
 ## UMAP
-merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 2,
+merge.umap <- plotUMAP(merged.samples, cell_color = "km_clus", point_size = 2,
                      point_shape = "no_border", label_size = 0, title = ""); merge.umap
 
 

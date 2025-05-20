@@ -48,11 +48,11 @@ merged.samples <- runUMAP(merged.samples, dimensions_to_use = 1:7, n_components 
 
 
 # Clustering
-merged.samples <- createNearestNetwork(merged.samples, dimensions_to_use = 1:7, feats_to_use = "hvf", 
+merged.samples <- createNearestNetwork(merged.samples, spat_unit = "cell", feat_type = "rna", 
+                                       dimensions_to_use = 1:7, feats_to_use = "hvf", 
                                        dim_reduction_name = "pca", name = "sNN.pca")
 merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resolution = 0.25) # Leiden
-merged.samples <- doKmeans(merged.samples, name = "km_clus", expression_values = "normalized", 
-                           feats_to_use = "hvf", return_gobject = T) # KMeans
+
 
 # Plot dim reduction
 ## PCA

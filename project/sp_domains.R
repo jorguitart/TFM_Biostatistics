@@ -9,28 +9,35 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
 
-####--SAMPLE--####
-# Timer start
-t0 <- Sys.time()
+####--HMRF--####
+if(!file.exists("./project/material/enrichment.RData")) {
+  t0 <- Sys.time()
+  
+  cat("Loading sample...")
+  sample <- readRDS("./project/material/filtered_samples/merge_norm.rds")
+  
+  cat("Creating spatial network")
+  sample <- createSpatialNetwork(sample, minimum_k = 2, name = "spat_network", method = "Delaunay") 
+  
+  cat("Extracting spatial genes...")
+  sample <- binSpect(sample, expression_values = "normalized", bin_method = "rank",
+                     spatial_network_name = "spat_network", do_parallel = T, cores = 4, return_gobject = T)
+  
+  cat("Creating HMRF object...")
+  sample@dimension_reduction$cells$cell$rna$spatial$spatial_feat <- sample@dimension_reduction$cells$cell$rna$pca$pca
+  sample.hmrf <- initHMRF_V2(sample, spat_unit = "cell", feat_type = "rna", cl.method = "leiden",
+                             metadata_to_use = "leiden_clus" , spatial_network_name = "spat_network")
+  
+  t1 <- Sys.time() - t0
+  cat("HMRF object obtained. "); t1
+  
+  cat("Saving environment image...")
+  rm(t0, t1); save.image(file = "./project/material/enrichment.RData")
+  cat("Done.")
+}
 
-
-# Spatial extraction of genes
-sample <- readRDS("./project/material/filtered_samples/merge_norm.rds") # Sample
-
-## Create network
-sample <- createSpatialNetwork(sample, minimum_k = 2, name = "spat_network", method = "Delaunay")
-
-## Execute extraction
-sample <- binSpect(sample, expression_values = "normalized", bin_method = "rank",
-                   spatial_network_name = "spat_network", do_parallel = T, cores = 4, return_gobject = T)
-
-## Initialize HMRF 
-sample@dimension_reduction$cells$cell$rna$spatial$spatial_feat <- sample@dimension_reduction$cells$cell$rna$pca$pca
-sample.hmrf <- initHMRF_V2(sample, spat_unit = "cell", feat_type = "rna", cl.method = "leiden", 
-                           metadata_to_use = "leiden_clus" , spatial_network_name = "spat_network")
-
+# Run HMRF model
+load("./project/material/enrichment.RData"); t0 <- Sys.time()
 HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(0, 5, 20))
-
-## Timer stop
 t1 <- Sys.time() - t0; t1
 

@@ -31,7 +31,7 @@ if(!file.exists("./project/material/enrichment.RData")) {
   t1 <- Sys.time() - t0
   message("HMRF object obtained."); t1
   
-  message("Saving environment image..."); cat("\n")
+  message("Saving environment image...")
   rm(t0, t1); save.image(file = "./project/material/enrichment.RData")
   message("Done."); cat("\n")
 }

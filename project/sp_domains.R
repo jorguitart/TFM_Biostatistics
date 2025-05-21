@@ -13,27 +13,27 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 if(!file.exists("./project/material/enrichment.RData")) {
   t0 <- Sys.time()
   
-  cat("Loading sample...")
+  message("Loading sample...")
   sample <- readRDS("./project/material/filtered_samples/merge_norm.rds")
   
-  cat("Creating spatial network")
+  message("Creating spatial network...")
   sample <- createSpatialNetwork(sample, minimum_k = 2, name = "spat_network", method = "Delaunay") 
   
-  cat("Extracting spatial genes...")
+  message("Extracting spatial genes...")
   sample <- binSpect(sample, expression_values = "normalized", bin_method = "rank",
                      spatial_network_name = "spat_network", do_parallel = T, cores = 4, return_gobject = T)
   
-  cat("Creating HMRF object...")
+  message("Creating HMRF object...")
   sample@dimension_reduction$cells$cell$rna$spatial$spatial_feat <- sample@dimension_reduction$cells$cell$rna$pca$pca
   sample.hmrf <- initHMRF_V2(sample, spat_unit = "cell", feat_type = "rna", cl.method = "leiden",
                              metadata_to_use = "leiden_clus" , spatial_network_name = "spat_network")
   
   t1 <- Sys.time() - t0
-  cat("HMRF object obtained. "); t1
+  message("HMRF object obtained."); t1
   
-  cat("Saving environment image...")
+  message("Saving environment image..."); cat("\n")
   rm(t0, t1); save.image(file = "./project/material/enrichment.RData")
-  cat("Done.")
+  message("Done."); cat("\n")
 }
 
 # Run HMRF model

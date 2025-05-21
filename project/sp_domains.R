@@ -29,7 +29,7 @@ if(!file.exists("./project/material/enrichment.RData")) {
                              metadata_to_use = "leiden_clus" , spatial_network_name = "spat_network")
   
   t1 <- Sys.time() - t0
-  message("HMRF object obtained."); t1
+  message("HMRF object created."); t1
   
   message("Saving environment image...")
   rm(t0, t1); save.image(file = "./project/material/enrichment.RData")

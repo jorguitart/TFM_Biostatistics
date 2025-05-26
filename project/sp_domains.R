@@ -41,7 +41,3 @@ load("./project/material/enrichment.RData"); t0 <- Sys.time()
 HMRF.model <- doHMRF_V2(sample.hmrf); save(HMRF.model, file = "./project/material/hrmf.RData")
 message("Done."); t1 <- Sys.time() - t0; t1
 
-sample@spatial_enrichment$cell$rna$HMRF <- HMRF.model$`k=18 b=46.00`
-
-saveRDS(sample, file = "./project/material/filtered_samples/enr_data.rds")
-

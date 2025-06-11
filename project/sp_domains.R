@@ -8,11 +8,12 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 
 
 ####--HMRF--####
-if(!file.exists("./project/material/enrichment.RData")) {
+if(!file.exists("./project/material/preHMRF.RData")) {
   t0 <- Sys.time()
   
   message("Loading sample...")
-  sample <- readRDS("./project/material/filtered_samples/merge_norm.rds")
+  sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/normalized_sample", 
+                       python_path = "C:/ProgramData/anaconda3/python.exe")
   
   message("Creating spatial network...")
   sample <- createSpatialNetwork(sample, minimum_k = 2, name = "spat_network", method = "Delaunay") 
@@ -30,13 +31,17 @@ if(!file.exists("./project/material/enrichment.RData")) {
   message("HMRF object created."); t1
   
   message("Saving environment image...")
-  rm(t0, t1); save.image(file = "./project/material/preHMRF.RData")
+  saveGiotto(sample, foldername = "init_sample", dir = "./project/material/filtered_samples")
+  rm(t0, t1); save(sample.hmrf, file = "./project/material/preHMRF.RData")
   message("Done."); cat("\n")
 } else {message("File found. Starting HMRF...")}
 
 # Run HMRF model
+sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/init_sample", 
+                     python_path = "C:/ProgramData/anaconda3/python.exe")
 load("./project/material/preHMRF.RData"); t0 <- Sys.time()
 HMRF.model <- doHMRF_V2(sample.hmrf); save(HMRF.model, file = "./project/material/HMRF.RData")
-sample <- addHMRF_V2(sample, HMRFoutput = HMRF.model); save(sample, file = "./project/material/postHMRF.RData")
+sample <- addHMRF_V2(sample, HMRFoutput = HMRF.model)
+saveGiotto(sample, foldername = "resolved_sample", dir = "./project/material/filtered_samples")
 message("Done."); t1 <- Sys.time() - t0; t1
 

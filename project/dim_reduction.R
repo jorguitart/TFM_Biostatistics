@@ -12,7 +12,8 @@ t0 <- Sys.time()
 
 
 # Normalization
-merged.samples <- readRDS("./project/material/filtered_samples/merge.rds") # Merged data
+merged.samples <- loadGiotto(path_to_folder = "./project/material/filtered_samples/merged_sample", 
+                             python_path = "C:/ProgramData/anaconda3/python.exe")
 merged.samples <- normalizeGiotto(merged.samples); merged.samples
 
 ## Add statistics
@@ -51,12 +52,12 @@ merge.scree <- screePlot(merged.samples, expression_values = "normalized",
 
 
 ## UMAP
-merge.umap <- plotUMAP(merged.samples, cell_color = "km_clus", point_size = 2,
+merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 2,
                      point_shape = "no_border", label_size = 0, title = ""); merge.umap
 
 
 # Save sample
-saveRDS(merged.samples, file = "./project/material/filtered_samples/merge_norm.rds")
+saveGiotto(merged.samples, foldername = "normalized_sample", dir = "./project/material/filtered_samples")
 
 ## Timer stop
 t1 <- Sys.time() - t0; t1

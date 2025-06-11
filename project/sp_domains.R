@@ -32,12 +32,13 @@ if(!file.exists("./project/material/enrichment.RData")) {
   message("HMRF object created."); t1
   
   message("Saving environment image...")
-  rm(t0, t1); save.image(file = "./project/material/enrichment.RData")
+  rm(t0, t1); save.image(file = "./project/material/preHMRF.RData")
   message("Done."); cat("\n")
 } else {message("File found. Starting HMRF...")}
 
 # Run HMRF model
-load("./project/material/enrichment.RData"); t0 <- Sys.time()
-HMRF.model <- doHMRF_V2(sample.hmrf); save(HMRF.model, file = "./project/material/hrmf.RData")
+load("./project/material/preHMRF.RData"); t0 <- Sys.time()
+HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(46, 0, 1)); save(HMRF.model, file = "./project/material/HMRF.RData")
+sample <- addHMRF(sample, HMRFoutput = HMRF.model.fix, k = 18, betas_to_add = c(46, 0, 1), hmrf_name = "HMRF")
 message("Done."); t1 <- Sys.time() - t0; t1
 

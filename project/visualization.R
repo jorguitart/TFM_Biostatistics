@@ -9,3 +9,8 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 
 ####--DATA--####
 load(file = "./project/material/postHMRF.RData")
+sample@spatial_info <- sample@spatial_locs
+
+spatPlot2D(sample, cell_color = "leiden_clus", show_plot = T)
+
+

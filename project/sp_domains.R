@@ -38,7 +38,7 @@ if(!file.exists("./project/material/enrichment.RData")) {
 
 # Run HMRF model
 load("./project/material/preHMRF.RData"); t0 <- Sys.time()
-HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(46, 0, 1)); save(HMRF.model, file = "./project/material/HMRF.RData")
-sample <- addHMRF(sample, HMRFoutput = HMRF.model.fix, k = 18, betas_to_add = c(46, 0, 1), hmrf_name = "HMRF")
+HMRF.model <- doHMRF_V2(sample.hmrf); save(HMRF.model, file = "./project/material/HMRF.RData")
+sample <- addHMRF_V2(sample, HMRFoutput = HMRF.model); save(sample, file = "./project/material/postHMRF.RData")
 message("Done."); t1 <- Sys.time() - t0; t1
 

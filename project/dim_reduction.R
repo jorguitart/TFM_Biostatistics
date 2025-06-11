@@ -1,7 +1,5 @@
 ####--LIBRARIES--####
-library(dplyr)
 library(tidyverse)
-library(ggplot2)
 library(ggpubr)
 library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = FALSE)

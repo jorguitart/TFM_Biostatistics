@@ -1,7 +1,5 @@
 ####--LIBRARIES--####
-library(dplyr)
 library(tidyverse)
-library(ggplot2)
 library(ggpubr)
 library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = FALSE)
@@ -33,6 +31,7 @@ s18 <- readRDS("./project/material/filtered_samples/s18_filtered.rds")
 ####--MERGED SAMPLE--####
 # Obtain combined expression matrix
 s.list <- list(s01, s02, s03, s04, s05, s06, s08, s09, s11, s12, s13, s14, s15, s16, s17, s18)
+names <- c("s01", "s02", "s03", "s04", "s05", "s06", "s08", "s09", "s11", "s12", "s13", "s14", "s15", "s16", "s17", "s18")
 
 matrix.list <- lapply(s.list, function(s) getExpression(s, values = "raw", output = "matrix"))
 com.genes <- Reduce(intersect, lapply(matrix.list, rownames))

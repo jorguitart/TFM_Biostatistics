@@ -21,10 +21,11 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   message("Extracting spatial genes...")
   sample <- binSpect(sample, expression_values = "normalized", bin_method = "rank",
                      spatial_network_name = "spat_network", do_parallel = T, cores = 4, return_gobject = T)
+  feat.meta <- data.frame(fDataDT(sample)); top500 <- feat.meta[order(feat.meta$binSpect.pval), ][1:500, 1]
   
   message("Creating HMRF object...")
   sample@dimension_reduction$cells$cell$rna$spatial$spatial_feat <- sample@dimension_reduction$cells$cell$rna$pca$pca
-  sample.hmrf <- initHMRF_V2(sample, spat_unit = "cell", feat_type = "rna", cl.method = "leiden",
+  sample.hmrf <- initHMRF_V2(sample, spat_unit = "cell", feat_type = "rna", cl.method = "leiden", user_gene_list = top500, 
                              metadata_to_use = "leiden_clus" , spatial_network_name = "spat_network")
   
   t1 <- Sys.time() - t0

@@ -96,7 +96,6 @@ ggsave("./project/outcomes/qc/ct01_metrics.png", plot = s01.metric.plots,
 s01.filtered <- filterGiotto(s01, expression_values = "raw", expression_threshold = 1,
                             feat_det_in_min_cells = round(length(colnames(s01.matrix)) / 20, 0),
                             min_det_feats_per_cell = 1000)
-saveRDS(s01.filtered, file = "./project/material/filtered_samples/s01_filtered.rds") # readRDS()
 
 ### Visualization plot
 s01.spots.plot <- spatPlot2D(s01, cell_color = ("lightgrey"), point_size = 2,
@@ -183,7 +182,6 @@ ggsave("./project/outcomes/qc/ct02_metrics.png", plot = s02.metric.plots,
 s02.filtered <- filterGiotto(s02, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s02.matrix)) / 20, 0),
                              min_det_feats_per_cell = 750)
-saveRDS(s02.filtered, file = "./project/material/filtered_samples/s02_filtered.rds") # readRDS()
 
 ### Visualization plot
 s02.spots.plot <- spatPlot2D(s02, cell_color = ("lightgrey"), point_size = 2,
@@ -270,7 +268,6 @@ ggsave("./project/outcomes/qc/ct03_metrics.png", plot = s03.metric.plots,
 s03.filtered <- filterGiotto(s03, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s03.matrix)) / 20, 0),
                              min_det_feats_per_cell = 500)
-saveRDS(s03.filtered, file = "./project/material/filtered_samples/s03_filtered.rds") # readRDS()
 
 ### Visualization plot
 s03.spots.plot <- spatPlot2D(s03, cell_color = ("lightgrey"), point_size = 2,
@@ -357,7 +354,6 @@ ggsave("./project/outcomes/qc/ct04_metrics.png", plot = s04.metric.plots,
 s04.filtered <- filterGiotto(s04, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s04.matrix)) / 20, 0),
                              min_det_feats_per_cell = 1000)
-saveRDS(s04.filtered, file = "./project/material/filtered_samples/s04_filtered.rds") # readRDS()
 
 ### Visualization plot
 s04.spots.plot <- spatPlot2D(s04, cell_color = ("lightgrey"), point_size = 2,
@@ -444,7 +440,6 @@ ggsave("./project/outcomes/qc/ct05_metrics.png", plot = s05.metric.plots,
 s05.filtered <- filterGiotto(s05, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s05.matrix)) / 20, 0),
                              min_det_feats_per_cell = 500)
-saveRDS(s05.filtered, file = "./project/material/filtered_samples/s05_filtered.rds") # readRDS()
 
 ### Visualization plot
 s05.spots.plot <- spatPlot2D(s05, cell_color = ("lightgrey"), point_size = 2,
@@ -531,7 +526,6 @@ ggsave("./project/outcomes/qc/ct06_metrics.png", plot = s06.metric.plots,
 s06.filtered <- filterGiotto(s06, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s06.matrix)) / 20, 0),
                              min_det_feats_per_cell = 250)
-saveRDS(s06.filtered, file = "./project/material/filtered_samples/s06_filtered.rds") # readRDS()
 
 ### Visualization plot
 s06.spots.plot <- spatPlot2D(s06, cell_color = ("lightgrey"), point_size = 2,
@@ -618,7 +612,6 @@ ggsave("./project/outcomes/qc/ms01_metrics.png", plot = s07.metric.plots,
 s07.filtered <- filterGiotto(s07, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s07.matrix)) / 20, 0),
                              min_det_feats_per_cell = 1000)
-saveRDS(s07.filtered, file = "./project/material/filtered_samples/s07_filtered.rds") # readRDS()
 
 ### Visualization plot
 s07.spots.plot <- spatPlot2D(s07, cell_color = ("lightgrey"), point_size = 2,
@@ -705,7 +698,6 @@ ggsave("./project/outcomes/qc/ms02_metrics.png", plot = s08.metric.plots,
 s08.filtered <- filterGiotto(s08, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s08.matrix)) / 20, 0),
                              min_det_feats_per_cell = 125)
-saveRDS(s08.filtered, file = "./project/material/filtered_samples/s08_filtered.rds") # readRDS()
 
 ### Visualization plot
 s08.spots.plot <- spatPlot2D(s08, cell_color = ("lightgrey"), point_size = 2,
@@ -792,7 +784,6 @@ ggsave("./project/outcomes/qc/ms03_metrics.png", plot = s09.metric.plots,
 s09.filtered <- filterGiotto(s09, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s09.matrix)) / 20, 0),
                              min_det_feats_per_cell = 250)
-saveRDS(s09.filtered, file = "./project/material/filtered_samples/s09_filtered.rds") # readRDS()
 
 ### Visualization plot
 s09.spots.plot <- spatPlot2D(s09, cell_color = ("lightgrey"), point_size = 2,
@@ -879,7 +870,6 @@ ggsave("./project/outcomes/qc/ms04_metrics.png", plot = s10.metric.plots,
 s10.filtered <- filterGiotto(s10, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s10.matrix)) / 20, 0),
                              min_det_feats_per_cell = 250)
-saveRDS(s10.filtered, file = "./project/material/filtered_samples/s10_filtered.rds") # readRDS()
 
 ### Visualization plot
 s10.spots.plot <- spatPlot2D(s10, cell_color = ("lightgrey"), point_size = 2,
@@ -966,7 +956,6 @@ ggsave("./project/outcomes/qc/ms05_metrics.png", plot = s11.metric.plots,
 s11.filtered <- filterGiotto(s11, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s10.matrix)) / 20, 0),
                              min_det_feats_per_cell = 125)
-saveRDS(s11.filtered, file = "./project/material/filtered_samples/s11_filtered.rds") # readRDS()
 
 ### Visualization plot
 s11.spots.plot <- spatPlot2D(s11, cell_color = ("lightgrey"), point_size = 2,
@@ -1053,7 +1042,6 @@ ggsave("./project/outcomes/qc/ms06_metrics.png", plot = s12.metric.plots,
 s12.filtered <- filterGiotto(s12, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s12.matrix)) / 20, 0),
                              min_det_feats_per_cell = 250)
-saveRDS(s12.filtered, file = "./project/material/filtered_samples/s12_filtered.rds") # readRDS()
 
 ### Visualization plot
 s12.spots.plot <- spatPlot2D(s12, cell_color = ("lightgrey"), point_size = 2,
@@ -1140,7 +1128,6 @@ ggsave("./project/outcomes/qc/ms07_metrics.png", plot = s13.metric.plots,
 s13.filtered <- filterGiotto(s13, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s13.matrix)) / 20, 0),
                              min_det_feats_per_cell = 250)
-saveRDS(s13.filtered, file = "./project/material/filtered_samples/s13_filtered.rds") # readRDS()
 
 ### Visualization plot
 s13.spots.plot <- spatPlot2D(s13, cell_color = ("lightgrey"), point_size = 2,
@@ -1227,7 +1214,6 @@ ggsave("./project/outcomes/qc/ms08_metrics.png", plot = s14.metric.plots,
 s14.filtered <- filterGiotto(s14, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s14.matrix)) / 20, 0),
                              min_det_feats_per_cell = 500)
-saveRDS(s14.filtered, file = "./project/material/filtered_samples/s14_filtered.rds") # readRDS()
 
 ### Visualization plot
 s14.spots.plot <- spatPlot2D(s14, cell_color = ("lightgrey"), point_size = 2,
@@ -1314,7 +1300,6 @@ ggsave("./project/outcomes/qc/ms09_metrics.png", plot = s15.metric.plots,
 s15.filtered <- filterGiotto(s15, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s15.matrix)) / 20, 0),
                              min_det_feats_per_cell = 500)
-saveRDS(s15.filtered, file = "./project/material/filtered_samples/s15_filtered.rds") # readRDS()
 
 ### Visualization plot
 s15.spots.plot <- spatPlot2D(s15, cell_color = ("lightgrey"), point_size = 2,
@@ -1401,7 +1386,6 @@ ggsave("./project/outcomes/qc/ms10_metrics.png", plot = s16.metric.plots,
 s16.filtered <- filterGiotto(s16, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s16.matrix)) / 20, 0),
                              min_det_feats_per_cell = 500)
-saveRDS(s16.filtered, file = "./project/material/filtered_samples/s16_filtered.rds") # readRDS()
 
 ### Visualization plot
 s16.spots.plot <- spatPlot2D(s16, cell_color = ("lightgrey"), point_size = 2,
@@ -1488,7 +1472,6 @@ ggsave("./project/outcomes/qc/ms11_metrics.png", plot = s17.metric.plots,
 s17.filtered <- filterGiotto(s17, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s17.matrix)) / 20, 0),
                              min_det_feats_per_cell = 500)
-saveRDS(s17.filtered, file = "./project/material/filtered_samples/s17_filtered.rds") # readRDS()
 
 ### Visualization plot
 s17.spots.plot <- spatPlot2D(s17, cell_color = ("lightgrey"), point_size = 2,
@@ -1575,7 +1558,6 @@ ggsave("./project/outcomes/qc/ms12_metrics.png", plot = s18.metric.plots,
 s18.filtered <- filterGiotto(s18, expression_values = "raw", expression_threshold = 1,
                              feat_det_in_min_cells = round(length(colnames(s18.matrix)) / 20, 0),
                              min_det_feats_per_cell = 250)
-saveRDS(s18.filtered, file = "./project/material/filtered_samples/s18_filtered.rds") # readRDS()
 
 ### Visualization plot
 s18.spots.plot <- spatPlot2D(s18, cell_color = ("lightgrey"), point_size = 2,

@@ -8,8 +8,9 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 
 
 ####--HMRF--####
+t0 <- Sys.time()
+
 if(!file.exists("./project/material/preHMRF.RData")) {
-  t0 <- Sys.time()
   
   message("Loading sample...")
   sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/normalized_sample", 
@@ -28,19 +29,18 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   sample.hmrf <- initHMRF_V2(sample, spat_unit = "cell", feat_type = "rna", cl.method = "leiden", user_gene_list = top500, 
                              metadata_to_use = "leiden_clus" , spatial_network_name = "spat_network")
   
-  t1 <- Sys.time() - t0
-  message("HMRF object created."); t1
+  message("HMRF object created.")
   
   message("Saving environment image...")
   saveGiotto(sample, foldername = "init_sample", dir = "./project/material/filtered_samples")
-  rm(t0, t1); save(sample.hmrf, file = "./project/material/preHMRF.RData")
+  save(sample.hmrf, file = "./project/material/preHMRF.RData")
   message("Done."); cat("\n")
 } else {message("File found. Starting HMRF...")}
 
 # Run HMRF model
 sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/init_sample", 
                      python_path = "C:/ProgramData/anaconda3/python.exe")
-load("./project/material/preHMRF.RData"); t0 <- Sys.time()
+load("./project/material/preHMRF.RData")
 HMRF.model <- doHMRF_V2(sample.hmrf); save(HMRF.model, file = "./project/material/HMRF.RData")
 sample <- addHMRF_V2(sample, HMRFoutput = HMRF.model)
 saveGiotto(sample, foldername = "resolved_sample", dir = "./project/material/filtered_samples")

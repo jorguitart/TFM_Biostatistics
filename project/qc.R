@@ -1592,11 +1592,11 @@ ggsave("./project/outcomes/qc/ms12_deleted.png", plot = s18.spots.plot,
 
 ####--MERGE--####
 s.list <- list(s01.filtered, s02.filtered, s03.filtered, s04.filtered, s05.filtered, s06.filtered, 
-               s08.filtered, s09.filtered, s11.filtered, s12.filtered, 
-               s13.filtered, s14.filtered, s15.filtered, s16.filtered, s17.filtered, s18.filtered)
+               s08.filtered, s09.filtered, s11.filtered, s12.filtered, s13.filtered, s14.filtered, 
+               s15.filtered, s16.filtered, s17.filtered, s18.filtered)
 names <- c("ctrl01", "ctrl02", "ctrl03", "ctrl04", "ctrl05", "ctrl06", 
-           "msca08", "msca09", "msca11", "msca12", 
-           "msci13", "msci14", "mcsi15", "mcsi16", "mcsi17", "mcsi18")
+           "msca08", "msca09", "msca11", "msca12", "msca13", "msca14", 
+           "mcsi15", "mcsi16", "mcsi17", "mcsi18")
 
 merged.samples <- joinGiottoObjects(gobject_list = s.list, gobject_names = names, join_method = "no_change")
-saveGiotto(merged.samples, foldername = "merged_sample", dir = "./project/material/filtered_samples")
+saveGiotto(merged.samples, foldername = "merged_sample", dir = "./project/material/filtered_samples", overwrite = T)

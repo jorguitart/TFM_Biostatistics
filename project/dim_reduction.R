@@ -57,7 +57,7 @@ merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 
 
 
 # Save sample
-saveGiotto(merged.samples, foldername = "normalized_sample", dir = "./project/material/filtered_samples")
+saveGiotto(merged.samples, foldername = "normalized_sample", dir = "./project/material/filtered_samples", overwrite = T)
 
 ## Timer stop
 t1 <- Sys.time() - t0; t1

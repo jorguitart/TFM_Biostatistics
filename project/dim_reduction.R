@@ -22,7 +22,7 @@ merged.samples <- addFeatStatistics(merged.samples); merged.samples <- addCellSt
 
 # HVGs - Dim reduction
 ## Calculate HVGs
-merged.samples <- calculateHVF(merged.samples, expression_values = "normalized")
+merged.samples <- calculateHVF(merged.samples, expression_values = "normalized", show_plot = T)
 
 ## Run dim reduction
 ### PCA

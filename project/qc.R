@@ -1596,7 +1596,7 @@ s.list <- list(s01.filtered, s02.filtered, s03.filtered, s04.filtered, s05.filte
                s15.filtered, s16.filtered, s17.filtered, s18.filtered)
 names <- c("ctrl01", "ctrl02", "ctrl03", "ctrl04", "ctrl05", "ctrl06", 
            "msca08", "msca09", "msca11", "msca12", "msca13", "msca14", 
-           "mcsi15", "mcsi16", "mcsi17", "mcsi18")
+           "msci15", "msci16", "msci17", "msci18")
 
 merged.samples <- joinGiottoObjects(gobject_list = s.list, gobject_names = names, join_method = "no_change")
 saveGiotto(merged.samples, foldername = "merged_sample", dir = "./project/material/filtered_samples", overwrite = T)

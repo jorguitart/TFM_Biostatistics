@@ -79,30 +79,27 @@ s01.libvdet <- ggplot(s01.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s01.thresholds <- filterCombinations(s01, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s01.matrix)) / 20, 0), 
-                                                                 4), # 5% 0f cells
+                                     feat_det_in_min_cells = rep(round(ncol(s01.matrix) / 20, 0), 4), # 5% 0f cells
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s01.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s01.metric.plots <- ggarrange(s01.detected, s01.det.along, 
-                              s01.libvdet, s01.thresholds$ggplot) # Combine all plots
-rm(s01.detected, s01.det.along, s01.libvdet, s01.thresholds); s01.metric.plots
-ggsave("./project/outcomes/qc/ct01_metrics.png", plot = s01.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s01.filtered <- filterGiotto(s01, expression_values = "raw", expression_threshold = 1,
-                            feat_det_in_min_cells = round(length(colnames(s01.matrix)) / 20, 0),
+                            feat_det_in_min_cells = round(ncol(s01.matrix) / 20, 0),
                             min_det_feats_per_cell = 1000)
 
 ### Visualization plot
 s01.spots.plot <- spatPlot2D(s01, cell_color = ("lightgrey"), point_size = 2,
                             select_cells = s01.filtered@cell_ID$cell, # Kept spots
                             other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                            title = "Deleted spots (sample 1)"); s01.spots.plot
-ggsave("./project/outcomes/qc/ct01_deleted.png", plot = s01.spots.plot, 
+                            title = "")
+
+s01.metric.plots <- ggarrange(s01.detected, s01.det.along, 
+                              s01.libvdet, s01.spots.plot) # Combine all plots
+rm(s01.detected, s01.det.along, s01.libvdet, s01.thresholds); s01.metric.plots
+
+ggsave("./project/outcomes/qc/ct01_metrics.jpg", plot = s01.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 02--####
@@ -165,30 +162,27 @@ s02.libvdet <- ggplot(s02.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s02.thresholds <- filterCombinations(s02, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s02.matrix)) / 20, 0), 
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s02.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s02.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s02.metric.plots <- ggarrange(s02.detected, s02.det.along, 
-                              s02.libvdet, s02.thresholds$ggplot) # Combine all plots
-rm(s02.detected, s02.det.along, s02.libvdet, s02.thresholds); s02.metric.plots
-ggsave("./project/outcomes/qc/ct02_metrics.png", plot = s02.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s02.filtered <- filterGiotto(s02, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s02.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s02.matrix) / 20, 0),
                              min_det_feats_per_cell = 750)
 
 ### Visualization plot
 s02.spots.plot <- spatPlot2D(s02, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s02.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 2)"); s02.spots.plot
-ggsave("./project/outcomes/qc/ct02_deleted.png", plot = s02.spots.plot, 
+                             title = "")
+
+s02.metric.plots <- ggarrange(s02.detected, s02.det.along, 
+                              s02.libvdet, s02.spots.plot) # Combine all plots
+rm(s02.detected, s02.det.along, s02.libvdet, s02.thresholds); s02.metric.plots
+
+ggsave("./project/outcomes/qc/ct02_metrics.jpg", plot = s02.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 03--####
@@ -251,30 +245,27 @@ s03.libvdet <- ggplot(s03.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s03.thresholds <- filterCombinations(s03, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s03.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s03.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s03.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s03.metric.plots <- ggarrange(s03.detected, s03.det.along, 
-                              s03.libvdet, s03.thresholds$ggplot) # Combine all plots
-rm(s03.detected, s03.det.along, s03.libvdet, s03.thresholds); s03.metric.plots
-ggsave("./project/outcomes/qc/ct03_metrics.png", plot = s03.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s03.filtered <- filterGiotto(s03, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s03.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s03.matrix) / 20, 0),
                              min_det_feats_per_cell = 500)
 
 ### Visualization plot
 s03.spots.plot <- spatPlot2D(s03, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s03.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 3)"); s03.spots.plot
-ggsave("./project/outcomes/qc/ct03_deleted.png", plot = s03.spots.plot, 
+                             title = "")
+
+s03.metric.plots <- ggarrange(s03.detected, s03.det.along, 
+                              s03.libvdet, s03.spots.plot) # Combine all plots
+rm(s03.detected, s03.det.along, s03.libvdet, s03.thresholds); s03.metric.plots
+
+ggsave("./project/outcomes/qc/ct03_metrics.jpg", plot = s03.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 04--####
@@ -337,30 +328,27 @@ s04.libvdet <- ggplot(s04.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s04.thresholds <- filterCombinations(s04, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s04.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s04.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s04.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s04.metric.plots <- ggarrange(s04.detected, s04.det.along, 
-                              s04.libvdet, s04.thresholds$ggplot) # Combine all plots
-rm(s04.detected, s04.det.along, s04.libvdet, s04.thresholds); s04.metric.plots
-ggsave("./project/outcomes/qc/ct04_metrics.png", plot = s04.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s04.filtered <- filterGiotto(s04, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s04.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s04.matrix) / 20, 0),
                              min_det_feats_per_cell = 1000)
 
 ### Visualization plot
 s04.spots.plot <- spatPlot2D(s04, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s04.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 4)"); s04.spots.plot
-ggsave("./project/outcomes/qc/ct04_deleted.png", plot = s04.spots.plot, 
+                             title = "")
+
+s04.metric.plots <- ggarrange(s04.detected, s04.det.along, 
+                              s04.libvdet, s04.spots.plot) # Combine all plots
+rm(s04.detected, s04.det.along, s04.libvdet, s04.thresholds); s04.metric.plots
+
+ggsave("./project/outcomes/qc/ct04_metrics.jpg", plot = s04.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 05--####
@@ -423,30 +411,27 @@ s05.libvdet <- ggplot(s05.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s05.thresholds <- filterCombinations(s05, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s05.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s05.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s05.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s05.metric.plots <- ggarrange(s05.detected, s05.det.along, 
-                              s05.libvdet, s05.thresholds$ggplot) # Combine all plots
-rm(s05.detected, s05.det.along, s05.libvdet, s05.thresholds); s05.metric.plots
-ggsave("./project/outcomes/qc/ct05_metrics.png", plot = s05.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s05.filtered <- filterGiotto(s05, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s05.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s05.matrix) / 20, 0),
                              min_det_feats_per_cell = 500)
 
 ### Visualization plot
 s05.spots.plot <- spatPlot2D(s05, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s05.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 5)"); s05.spots.plot
-ggsave("./project/outcomes/qc/ct05_deleted.png", plot = s05.spots.plot, 
+                             title = "")
+
+s05.metric.plots <- ggarrange(s05.detected, s05.det.along, 
+                              s05.libvdet, s05.spots.plot) # Combine all plots
+rm(s05.detected, s05.det.along, s05.libvdet, s05.thresholds); s05.metric.plots
+
+ggsave("./project/outcomes/qc/ct05_metrics.jpg", plot = s05.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 06--####
@@ -505,34 +490,31 @@ s06.det.along <- filterDistributions(s06, detection = "feats", nr_bins = 50,
 s06.libvdet <- ggplot(s06.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 0.3)) +
   theme_classic() + theme(legend.position = "none") + 
   xlab("total reads per spot") + ylab("detected genes per spot") +
-  annotate("text", label = paste0("Corr = ", s06.cor), x = 9000, y = 0); rm(s06.cor)
+  annotate("text", label = paste0("Corr = ", s06.cor), x = 7500, y = 0); rm(s06.cor)
 
 ### Threshold evaluation
 s06.thresholds <- filterCombinations(s06, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s06.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s06.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s06.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s06.metric.plots <- ggarrange(s06.detected, s06.det.along, 
-                              s06.libvdet, s06.thresholds$ggplot) # Combine all plots
-rm(s06.detected, s06.det.along, s06.libvdet, s06.thresholds); s06.metric.plots
-ggsave("./project/outcomes/qc/ct06_metrics.png", plot = s06.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s06.filtered <- filterGiotto(s06, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s06.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s06.matrix) / 20, 0),
                              min_det_feats_per_cell = 250)
 
 ### Visualization plot
 s06.spots.plot <- spatPlot2D(s06, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s06.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 6)"); s06.spots.plot
-ggsave("./project/outcomes/qc/ct06_deleted.png", plot = s06.spots.plot, 
+                             title = "")
+
+s06.metric.plots <- ggarrange(s06.detected, s06.det.along, 
+                              s06.libvdet, s06.spots.plot) # Combine all plots
+rm(s06.detected, s06.det.along, s06.libvdet, s06.thresholds); s06.metric.plots
+
+ggsave("./project/outcomes/qc/ct06_metrics.jpg", plot = s06.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 07--####
@@ -595,30 +577,27 @@ s07.libvdet <- ggplot(s07.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s07.thresholds <- filterCombinations(s07, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s07.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s07.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000),
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s07.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s07.metric.plots <- ggarrange(s07.detected, s07.det.along,
-                              s07.libvdet, s07.thresholds$ggplot) # Combine all plots
-rm(s07.detected, s07.det.along, s07.libvdet, s07.thresholds); s07.metric.plots
-ggsave("./project/outcomes/qc/ms01_metrics.png", plot = s07.metric.plots,
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s07.filtered <- filterGiotto(s07, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s07.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s07.matrix) / 20, 0),
                              min_det_feats_per_cell = 1000)
 
 ### Visualization plot
 s07.spots.plot <- spatPlot2D(s07, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s07.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 7)"); s07.spots.plot
-ggsave("./project/outcomes/qc/ms01_deleted.png", plot = s07.spots.plot,
+                             title = "")
+
+s07.metric.plots <- ggarrange(s07.detected, s07.det.along, 
+                              s07.libvdet, s07.spots.plot) # Combine all plots
+rm(s07.detected, s07.det.along, s07.libvdet, s07.thresholds); s07.metric.plots
+
+ggsave("./project/outcomes/qc/ms01_metrics.jpg", plot = s07.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 08--####
@@ -681,30 +660,28 @@ s08.libvdet <- ggplot(s08.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s08.thresholds <- filterCombinations(s08, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s08.matrix)) / 20, 0),
+                                     feat_det_in_min_cells = rep(round(ncol(s08.matrix) / 20, 0),
                                                                  4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s08.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s08.metric.plots <- ggarrange(s08.detected, s08.det.along, 
-                              s08.libvdet, s08.thresholds$ggplot) # Combine all plots
-rm(s08.detected, s08.det.along, s08.libvdet, s08.thresholds); s08.metric.plots
-ggsave("./project/outcomes/qc/ms02_metrics.png", plot = s08.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s08.filtered <- filterGiotto(s08, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s08.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s08.matrix) / 20, 0),
                              min_det_feats_per_cell = 125)
 
 ### Visualization plot
 s08.spots.plot <- spatPlot2D(s08, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s08.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 8)"); s08.spots.plot
-ggsave("./project/outcomes/qc/ms02_deleted.png", plot = s08.spots.plot, 
+                             title = "")
+
+s08.metric.plots <- ggarrange(s08.detected, s08.det.along, 
+                              s08.libvdet, s08.spots.plot) # Combine all plots
+rm(s08.detected, s08.det.along, s08.libvdet, s08.thresholds); s08.metric.plots
+
+ggsave("./project/outcomes/qc/ms02_metrics.jpg", plot = s08.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 09--####
@@ -767,30 +744,27 @@ s09.libvdet <- ggplot(s09.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s09.thresholds <- filterCombinations(s09, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s09.matrix)) / 20, 0), 
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s09.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s09.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s09.metric.plots <- ggarrange(s09.detected, s09.det.along, 
-                              s09.libvdet, s09.thresholds$ggplot) # Combine all plots
-rm(s09.detected, s09.det.along, s09.libvdet, s09.thresholds); s09.metric.plots
-ggsave("./project/outcomes/qc/ms03_metrics.png", plot = s09.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s09.filtered <- filterGiotto(s09, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s09.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s09.matrix) / 20, 0),
                              min_det_feats_per_cell = 250)
 
 ### Visualization plot
 s09.spots.plot <- spatPlot2D(s09, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s09.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 9)"); s09.spots.plot
-ggsave("./project/outcomes/qc/ms03_deleted.png", plot = s09.spots.plot, 
+                             title = "")
+
+s09.metric.plots <- ggarrange(s09.detected, s09.det.along, 
+                              s09.libvdet, s09.spots.plot) # Combine all plots
+rm(s09.detected, s09.det.along, s09.libvdet, s09.thresholds); s09.metric.plots
+
+ggsave("./project/outcomes/qc/ms03_metrics.jpg", plot = s09.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 10--####
@@ -853,22 +827,14 @@ s10.libvdet <- ggplot(s10.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s10.thresholds <- filterCombinations(s10, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s10.matrix)) / 20, 0), 
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s10.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s10.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s10.metric.plots <- ggarrange(s10.detected, s10.det.along, 
-                              s10.libvdet, s10.thresholds$ggplot) # Combine all plots
-rm(s10.detected, s10.det.along, s10.libvdet, s10.thresholds); s10.metric.plots
-ggsave("./project/outcomes/qc/ms04_metrics.png", plot = s10.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s10.filtered <- filterGiotto(s10, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s10.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s10.matrix) / 20, 0),
                              min_det_feats_per_cell = 250)
 
 ### Visualization plot
@@ -876,7 +842,12 @@ s10.spots.plot <- spatPlot2D(s10, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s10.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
                              title = "Deleted spots (sample 10)"); s10.spots.plot
-ggsave("./project/outcomes/qc/ms04_deleted.png", plot = s10.spots.plot, 
+
+s10.metric.plots <- ggarrange(s10.detected, s10.det.along, 
+                              s10.libvdet, s10.spots.plot) # Combine all plots
+rm(s10.detected, s10.det.along, s10.libvdet, s10.thresholds); s10.metric.plots
+
+ggsave("./project/outcomes/qc/ms04_metrics.jpg", plot = s10.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 11--####
@@ -939,30 +910,27 @@ s11.libvdet <- ggplot(s11.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s11.thresholds <- filterCombinations(s11, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s11.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s11.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s11.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s11.metric.plots <- ggarrange(s11.detected, s11.det.along, 
-                              s11.libvdet, s11.thresholds$ggplot) # Combine all plots
-rm(s11.detected, s11.det.along, s11.libvdet, s11.thresholds); s11.metric.plots
-ggsave("./project/outcomes/qc/ms05_metrics.png", plot = s11.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s11.filtered <- filterGiotto(s11, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s10.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s10.matrix) / 20, 0),
                              min_det_feats_per_cell = 125)
 
 ### Visualization plot
 s11.spots.plot <- spatPlot2D(s11, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s11.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 11)"); s11.spots.plot
-ggsave("./project/outcomes/qc/ms05_deleted.png", plot = s11.spots.plot, 
+                             title = "")
+
+s11.metric.plots <- ggarrange(s11.detected, s11.det.along, 
+                              s11.libvdet, s11.spots.plot) # Combine all plots
+rm(s11.detected, s11.det.along, s11.libvdet, s11.thresholds); s11.metric.plots
+
+ggsave("./project/outcomes/qc/ms05_metrics.jpg", plot = s11.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 12--####
@@ -1025,30 +993,27 @@ s12.libvdet <- ggplot(s12.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s12.thresholds <- filterCombinations(s12, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s12.matrix)) / 20, 0), 
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s12.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s12.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s12.metric.plots <- ggarrange(s12.detected, s12.det.along, 
-                              s12.libvdet, s12.thresholds$ggplot) # Combine all plots
-rm(s12.detected, s12.det.along, s12.libvdet, s12.thresholds); s12.metric.plots
-ggsave("./project/outcomes/qc/ms06_metrics.png", plot = s12.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s12.filtered <- filterGiotto(s12, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s12.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s12.matrix) / 20, 0),
                              min_det_feats_per_cell = 250)
 
 ### Visualization plot
 s12.spots.plot <- spatPlot2D(s12, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s12.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 12)"); s12.spots.plot
-ggsave("./project/outcomes/qc/ms06_deleted.png", plot = s12.spots.plot, 
+                             title = "")
+
+s12.metric.plots <- ggarrange(s12.detected, s12.det.along, 
+                              s12.libvdet, s12.spots.plot) # Combine all plots
+rm(s12.detected, s12.det.along, s12.libvdet, s12.thresholds); s12.metric.plots
+
+ggsave("./project/outcomes/qc/ms06_metrics.jpg", plot = s12.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 13--####
@@ -1111,30 +1076,27 @@ s13.libvdet <- ggplot(s13.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s13.thresholds <- filterCombinations(s13, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s13.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s13.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s13.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s13.metric.plots <- ggarrange(s13.detected, s13.det.along, 
-                              s13.libvdet, s13.thresholds$ggplot) # Combine all plots
-rm(s13.detected, s13.det.along, s13.libvdet, s13.thresholds); s13.metric.plots
-ggsave("./project/outcomes/qc/ms07_metrics.png", plot = s13.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s13.filtered <- filterGiotto(s13, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s13.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s13.matrix) / 20, 0),
                              min_det_feats_per_cell = 250)
 
 ### Visualization plot
 s13.spots.plot <- spatPlot2D(s13, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s13.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 13)"); s13.spots.plot
-ggsave("./project/outcomes/qc/ms07_deleted.png", plot = s13.spots.plot, 
+                             title = "")
+
+s13.metric.plots <- ggarrange(s13.detected, s13.det.along, 
+                              s13.libvdet, s13.spots.plot) # Combine all plots
+rm(s13.detected, s13.det.along, s13.libvdet, s13.thresholds); s13.metric.plots
+
+ggsave("./project/outcomes/qc/ms07_metrics.jpg", plot = s13.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 14--####
@@ -1197,30 +1159,27 @@ s14.libvdet <- ggplot(s14.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s14.thresholds <- filterCombinations(s14, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s14.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s14.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s14.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s14.metric.plots <- ggarrange(s14.detected, s14.det.along, 
-                              s14.libvdet, s14.thresholds$ggplot) # Combine all plots
-rm(s14.detected, s14.det.along, s14.libvdet, s14.thresholds); s14.metric.plots
-ggsave("./project/outcomes/qc/ms08_metrics.png", plot = s14.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s14.filtered <- filterGiotto(s14, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s14.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s14.matrix) / 20, 0),
                              min_det_feats_per_cell = 500)
 
 ### Visualization plot
 s14.spots.plot <- spatPlot2D(s14, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s14.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 14)"); s14.spots.plot
-ggsave("./project/outcomes/qc/ms08_deleted.png", plot = s14.spots.plot, 
+                             title = "")
+
+s14.metric.plots <- ggarrange(s14.detected, s14.det.along, 
+                              s14.libvdet, s14.spots.plot) # Combine all plots
+rm(s14.detected, s14.det.along, s14.libvdet, s14.thresholds); s14.metric.plots
+
+ggsave("./project/outcomes/qc/ms08_metrics.jpg", plot = s14.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 15--####
@@ -1283,22 +1242,14 @@ s15.libvdet <- ggplot(s15.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s15.thresholds <- filterCombinations(s15, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s15.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s15.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s15.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s15.metric.plots <- ggarrange(s15.detected, s15.det.along, 
-                              s15.libvdet, s15.thresholds$ggplot) # Combine all plots
-rm(s15.detected, s15.det.along, s15.libvdet, s15.thresholds); s15.metric.plots
-ggsave("./project/outcomes/qc/ms09_metrics.png", plot = s15.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s15.filtered <- filterGiotto(s15, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s15.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s15.matrix) / 20, 0),
                              min_det_feats_per_cell = 500)
 
 ### Visualization plot
@@ -1306,7 +1257,12 @@ s15.spots.plot <- spatPlot2D(s15, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s15.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
                              title = "Deleted spots (sample 15)"); s15.spots.plot
-ggsave("./project/outcomes/qc/ms09_deleted.png", plot = s15.spots.plot, 
+
+s15.metric.plots <- ggarrange(s15.detected, s15.det.along, 
+                              s15.libvdet, s15.spots.plot) # Combine all plots
+rm(s15.detected, s15.det.along, s15.libvdet, s15.thresholds); s15.metric.plots
+
+ggsave("./project/outcomes/qc/ms09_metrics.jpg", plot = s15.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 16--####
@@ -1369,30 +1325,27 @@ s16.libvdet <- ggplot(s16.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s16.thresholds <- filterCombinations(s16, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s16.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s16.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s16.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s16.metric.plots <- ggarrange(s16.detected, s16.det.along, 
-                              s16.libvdet, s16.thresholds$ggplot) # Combine all plots
-rm(s16.detected, s16.det.along, s16.libvdet, s16.thresholds); s16.metric.plots
-ggsave("./project/outcomes/qc/ms10_metrics.png", plot = s16.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s16.filtered <- filterGiotto(s16, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s16.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s16.matrix) / 20, 0),
                              min_det_feats_per_cell = 500)
 
 ### Visualization plot
 s16.spots.plot <- spatPlot2D(s16, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s16.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 16)"); s16.spots.plot
-ggsave("./project/outcomes/qc/ms10_deleted.png", plot = s16.spots.plot, 
+                             title = "")
+
+s16.metric.plots <- ggarrange(s16.detected, s16.det.along, 
+                              s16.libvdet, s16.spots.plot) # Combine all plots
+rm(s16.detected, s16.det.along, s16.libvdet, s16.thresholds); s16.metric.plots
+
+ggsave("./project/outcomes/qc/ms10_metrics.jpg", plot = s16.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 17--####
@@ -1455,30 +1408,27 @@ s17.libvdet <- ggplot(s17.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s17.thresholds <- filterCombinations(s17, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s17.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s17.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s17.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s17.metric.plots <- ggarrange(s17.detected, s17.det.along, 
-                              s17.libvdet, s17.thresholds$ggplot) # Combine all plots
-rm(s17.detected, s17.det.along, s17.libvdet, s17.thresholds); s17.metric.plots
-ggsave("./project/outcomes/qc/ms11_metrics.png", plot = s17.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s17.filtered <- filterGiotto(s17, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s17.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s17.matrix) / 20, 0),
                              min_det_feats_per_cell = 500)
 
 ### Visualization plot
 s17.spots.plot <- spatPlot2D(s17, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s17.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 17)"); s17.spots.plot
-ggsave("./project/outcomes/qc/ms11_deleted.png", plot = s17.spots.plot, 
+                             title = "")
+
+s17.metric.plots <- ggarrange(s17.detected, s17.det.along, 
+                              s17.libvdet, s17.spots.plot) # Combine all plots
+rm(s17.detected, s17.det.along, s17.libvdet, s17.thresholds); s17.metric.plots
+
+ggsave("./project/outcomes/qc/ms11_metrics.jpg", plot = s17.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 ####--SAMPLE 18--####
@@ -1541,30 +1491,27 @@ s18.libvdet <- ggplot(s18.meta, aes(n_reads, n_genes)) + geom_point(aes(alpha = 
 
 ### Threshold evaluation
 s18.thresholds <- filterCombinations(s18, expression_thresholds = 1,
-                                     feat_det_in_min_cells = rep(round(length(colnames(s18.matrix)) / 20, 0),
-                                                                 4),
+                                     feat_det_in_min_cells = rep(round(ncol(s18.matrix) / 20, 0), 4),
                                      min_det_feats_per_cell = c(125, 250, 500, 1000), 
                                      show_plot = F,
                                      default_save_name = "thresholds")
-s18.thresholds[["ggplot"]][["theme"]][["legend.position"]] <- "none" # Remove legend
-
-s18.metric.plots <- ggarrange(s18.detected, s18.det.along, 
-                              s18.libvdet, s18.thresholds$ggplot) # Combine all plots
-rm(s18.detected, s18.det.along, s18.libvdet, s18.thresholds); s18.metric.plots
-ggsave("./project/outcomes/qc/ms12_metrics.png", plot = s18.metric.plots, 
-       scale = 2, width = 1920, height = 1080, units = "px")
 
 ## Filter sample
 s18.filtered <- filterGiotto(s18, expression_values = "raw", expression_threshold = 1,
-                             feat_det_in_min_cells = round(length(colnames(s18.matrix)) / 20, 0),
+                             feat_det_in_min_cells = round(ncol(s18.matrix) / 20, 0),
                              min_det_feats_per_cell = 250)
 
 ### Visualization plot
 s18.spots.plot <- spatPlot2D(s18, cell_color = ("lightgrey"), point_size = 2,
                              select_cells = s18.filtered@cell_ID$cell, # Kept spots
                              other_cell_color = "red3", other_point_size = 2, # Mark deleted spots
-                             title = "Deleted spots (sample 18)"); s18.spots.plot
-ggsave("./project/outcomes/qc/ms12_deleted.png", plot = s18.spots.plot, 
+                             title = "")
+
+s18.metric.plots <- ggarrange(s18.detected, s18.det.along, 
+                              s18.libvdet, s18.spots.plot) # Combine all plots
+rm(s18.detected, s18.det.along, s18.libvdet, s18.thresholds); s18.metric.plots
+
+ggsave("./project/outcomes/qc/ms12_metrics.jpg", plot = s18.metric.plots, 
        scale = 2.5, width = 1920, height = 1080, units = "px")
 
 

@@ -53,7 +53,7 @@ merge.scree <- screePlot(merged.samples, expression_values = "normalized",
 
 ## UMAP
 merge.umap <- plotUMAP(merged.samples, cell_color = "leiden_clus", point_size = 2,
-                     point_shape = "no_border", label_size = 0, title = ""); merge.umap
+                     point_shape = "no_border", label_size = 0, title = "", point_alpha = 0.5); merge.umap
 
 
 # Save sample

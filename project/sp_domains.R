@@ -40,7 +40,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
 } else {message("File found. Starting HMRF...")}
 
 # Run HMRF model
-sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/init_sample", 
+sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/preinit_sample", 
                      python_path = "/usr/bin/python36")
 load("./project/material/preHMRF.RData")
 HMRF.model <- doHMRF_V2(sample.hmrf); save(HMRF.model, file = "./project/material/HMRF.RData")

@@ -13,7 +13,7 @@ t0 <- Sys.time()
 
 # Normalization
 merged.samples <- loadGiotto(path_to_folder = "./project/material/filtered_samples/merged_sample", 
-                             python_path = "C:/ProgramData/anaconda3/python.exe")
+                             python_path = "/usr/bin/python36")
 merged.samples <- normalizeGiotto(merged.samples, norm_methods = "standard"); merged.samples
 
 ## Add statistics
@@ -22,7 +22,7 @@ merged.samples <- addFeatStatistics(merged.samples); merged.samples <- addCellSt
 
 # HVGs - Dim reduction
 ## Calculate HVGs
-merged.samples <- calculateHVF(merged.samples, expression_values = "normalized", show_plot = T)
+merged.samples <- calculateHVF(merged.samples, expression_values = "normalized", show_plot = T, method = "cov_loess")
 
 ## Run dim reduction
 ### PCA
@@ -30,13 +30,11 @@ merged.samples <- runPCA(merged.samples, expression_values = "normalized", feats
                          name = "pca")
 
 ### UMAP
-merged.samples <- runUMAP(merged.samples, dimensions_to_use = 1:7, n_components = 2, 
-                          dim_reduction_name = "pca", feats_to_use = "hvf")
+merged.samples <- runUMAP(merged.samples, n_components = 2, dim_reduction_name = "pca", feats_to_use = "hvf")
 
 
 # Clustering
-merged.samples <- createNearestNetwork(merged.samples, spat_unit = "cell", feat_type = "rna", 
-                                       dimensions_to_use = 1:7, feats_to_use = "hvf", 
+merged.samples <- createNearestNetwork(merged.samples, spat_unit = "cell", feat_type = "rna", feats_to_use = "hvf", 
                                        dim_reduction_name = "pca", name = "sNN.pca")
 merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resolution = 0.25) # Leiden
 

@@ -14,7 +14,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   
   message("Loading sample...")
   sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/normalized_sample", 
-                       python_path = "C:/ProgramData/anaconda3/python.exe")
+                       python_path = "/usr/bin/python36")
   
   message("Creating spatial network...")
   sample <- createSpatialNetwork(sample, minimum_k = 6, name = "spat_network", method = "Delaunay", maximum_distance_delaunay = 40) 
@@ -43,7 +43,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
 
 # Run HMRF model
 sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/init_sample", 
-                     python_path = "C:/ProgramData/anaconda3/python.exe")
+                     python_path = "/usr/bin/python36")
 load("./project/material/preHMRF.RData")
 HMRF.model <- doHMRF_V2(sample.hmrf); save(HMRF.model, file = "./project/material/HMRF.RData")
 sample <- addHMRF_V2(sample, HMRFoutput = HMRF.model)

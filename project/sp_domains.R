@@ -14,7 +14,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   
   message("Loading sample...")
   sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/normalized_sample", 
-                       python_path = "/usr/bin/python36")
+                       python_path = "C:/ProgramData/anaconda3/python.exe")
   
   message("Creating spatial network...")
   sample <- createSpatialNetwork(sample, minimum_k = 6, name = "spat_network", method = "Delaunay", maximum_distance_delaunay = 40) 
@@ -25,7 +25,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   
   message("Calculating spatial correlation genes...")
   sp.cor <- detectSpatialCorFeats(sample, method = "network", spatial_network_name = "spat_network", subset_feats = sp.feats)
-  sp.cor <- clusterSpatialCorFeats(sp.cor, name = "spnetwork_cl", k = 11)
+  sp.cor <- clusterSpatialCorFeats(sp.cor, name = "spnetwork_cl", k = 13)
   cl.feats <- showSpatialCorFeats(sp.cor, use_clus_name = "spnetwork_cl", show_top_feats = 1)
   
   message("Creating HMRF object...")

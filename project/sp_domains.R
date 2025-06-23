@@ -30,13 +30,11 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   
   message("Creating HMRF object...")
   sample@dimension_reduction$cells$cell$rna$spatial$spatial_feat <- sample@dimension_reduction$cells$cell$rna$pca$pca
+  saveGiotto(sample, foldername = "preinit_sample", dir = "./project/material/filtered_samples", overwrite = T)
   sample.hmrf <- initHMRF_V2(sample, spat_unit = "cell", feat_type = "rna", cl.method = "leiden", user_gene_list = sp.feats, 
-                             spatial_network_name = "spat_network", k = 11)
-  
-  message("HMRF object created.")
+                             spatial_network_name = "spat_network", k = 7, resolution.cl = 0.25)
   
   message("Saving environment image...")
-  saveGiotto(sample, foldername = "init_sample", dir = "./project/material/filtered_samples", overwrite = T)
   save(sample.hmrf, file = "./project/material/preHMRF.RData")
   message("Done."); cat("\n")
 } else {message("File found. Starting HMRF...")}

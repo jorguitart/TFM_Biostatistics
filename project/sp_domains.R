@@ -21,7 +21,8 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   sample <- createSpatialDelaunayNetwork(sample, name = "spat_network")
   
   message("Extracting spatial genes...")
-  sample <- binSpect(sample, expression_values = "normalized", bin_method = "kmeans", spatial_network_name = "spat_network")
+  sample <- binSpect(sample, expression_values = "normalized", bin_method = "kmeans", 
+                     spatial_network_name = "spat_network")
   sp.feats <- sample@feat_metadata$cell$rna$feat_ID[order(sample@feat_metadata$cell$rna$binSpect.pval)][1:500]
   
   message("Creating HMRF object...")

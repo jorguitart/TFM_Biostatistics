@@ -6,17 +6,18 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 # library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
+setwd("~/TFM")
 
 ####--DIRs & INSTRUCTIONS--####
 #Directories
 dir <- "./project/material/GSE279181"
 sam <- c("ct01", "ct02", "ct03", "ct04", "ct05", "ct06", 
-         "ms01", "ms02", "ms03", "ms04", "ms05", "ms06", "ms07", "ms08", "ms09", "ms10", "ms11", "ms12")
+         "ms01", "ms02", "ms03", "ms04", "ms05", "ms06", "ms07", "ms08", 
+         "ms09", "ms10", "ms11", "ms12")
 sample.path <- file.path(dir, sam); rm(dir, sam)
 
 # Giotto instructions
-instr <- createGiottoInstructions(python_path = "C:/ProgramData/anaconda3/python.exe",
-                                  show_plot = F, save_plot = F)
+instr <- createGiottoInstructions(python_path = "/usr/bin/python36", save_plot = F)
 
 
 ####--SAMPLE 01--####
@@ -27,6 +28,7 @@ s01 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s01 <- addCellMetadata(s01, new_metadata = rep("CTRL", ncol(s01)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -110,6 +112,7 @@ s02 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s02 <- addCellMetadata(s02, new_metadata = rep("CTRL", ncol(s02)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -193,6 +196,7 @@ s03 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s03 <- addCellMetadata(s03, new_metadata = rep("CTRL", ncol(s03)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -276,6 +280,7 @@ s04 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s04 <- addCellMetadata(s04, new_metadata = rep("CTRL", ncol(s04)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -359,6 +364,7 @@ s05 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s05 <- addCellMetadata(s05, new_metadata = rep("CTRL", ncol(s05)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -442,6 +448,7 @@ s06 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s06 <- addCellMetadata(s06, new_metadata = rep("CTRL", ncol(s06)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -525,6 +532,7 @@ s07 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s07 <- addCellMetadata(s07, new_metadata = rep("MSCA", ncol(s07)), vector_name = "type")
 
 # Quality control
 ## Filter over tissue genes
@@ -608,6 +616,7 @@ s08 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s08 <- addCellMetadata(s08, new_metadata = rep("MSCA", ncol(s08)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -692,6 +701,7 @@ s09 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s09 <- addCellMetadata(s09, new_metadata = rep("MSCA", ncol(s09)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -775,6 +785,7 @@ s10 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s10 <- addCellMetadata(s10, new_metadata = rep("MSCA", ncol(s10)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -858,6 +869,7 @@ s11 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s11 <- addCellMetadata(s11, new_metadata = rep("MSCA", ncol(s11)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -941,6 +953,7 @@ s12 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s12 <- addCellMetadata(s12, new_metadata = rep("MSCA", ncol(s12)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -1024,6 +1037,7 @@ s13 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s13 <- addCellMetadata(s13, new_metadata = rep("MSCA", ncol(s13)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -1107,6 +1121,7 @@ s14 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s14 <- addCellMetadata(s14, new_metadata = rep("MSCA", ncol(s14)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -1190,6 +1205,7 @@ s15 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s15 <- addCellMetadata(s15, new_metadata = rep("MSCI", ncol(s15)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -1273,6 +1289,7 @@ s16 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s16 <- addCellMetadata(s16, new_metadata = rep("MSCI", ncol(s16)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -1356,6 +1373,7 @@ s17 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s17 <- addCellMetadata(s17, new_metadata = rep("MSCI", ncol(s17)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -1439,6 +1457,7 @@ s18 <- createGiottoVisiumObject(
   expr_data = "filter", # Use filtered data
   png_name = "tissue_lowres_image.png", # Select lowres image
   instructions = instr)
+s18 <- addCellMetadata(s18, new_metadata = rep("MSCI", ncol(s18)), vector_name = "type")
 
 # Quality control 
 ## Filter over tissue genes
@@ -1545,5 +1564,6 @@ names <- c("ctrl01", "ctrl02", "ctrl03", "ctrl04", "ctrl05", "ctrl06",
            "msca08", "msca09", "msca11", "msca12", "msca13", "msca14", 
            "msci15", "msci16", "msci17", "msci18")
 
-merged.samples <- joinGiottoObjects(gobject_list = s.list, gobject_names = names, join_method = "no_change")
-saveGiotto(merged.samples, foldername = "merged_sample", dir = "./project/material/filtered_samples", overwrite = T)
+merged.samples <- joinGiottoObjects(gobject_list = s.list, gobject_names = names)
+saveGiotto(merged.samples, foldername = "merged_sample", 
+           dir = "./project/material/filtered_samples", overwrite = T)

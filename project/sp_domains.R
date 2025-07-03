@@ -21,7 +21,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   
   message("Extracting spatial genes...")
   sample <- binSpect(sample, expression_values = "normalized", bin_method = "kmeans", 
-                     spatial_network_name = "spat_network")
+                     spatial_network_name = "spat_network", return_gobject = T)
   
   message("Creating HMRF object...")
   saveGiotto(sample, foldername = "preinit_sample", dir = "./project/material/filtered_samples", overwrite = T)

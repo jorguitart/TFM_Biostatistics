@@ -40,7 +40,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
 sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/preinit_sample", 
                      python_path = "/usr/bin/python36")
 load("./project/material/preHMRF.RData")
-HMRF.model <- doHMRF_V2(sample.hmrf); save(HMRF.model, file = "./project/material/HMRF.RData")
+HMRF.model <- doHMRF_V2(sample.hmrf, c(0, 5, 6)); save(HMRF.model, file = "./project/material/HMRF.RData")
 sample <- addHMRF_V2(sample, HMRFoutput = HMRF.model)
 saveGiotto(sample, foldername = "resolved_sample", dir = "./project/material/filtered_samples", overwrite = T)
 message("Done."); t1 <- Sys.time() - t0; t1

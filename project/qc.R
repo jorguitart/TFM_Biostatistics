@@ -17,7 +17,7 @@ sam <- c("ct01", "ct02", "ct03", "ct04", "ct05", "ct06",
 sample.path <- file.path(dir, sam); rm(dir, sam)
 
 # Giotto instructions
-instr <- createGiottoInstructions(python_path = "/usr/bin/python36", save_plot = F)
+instr <- createGiottoInstructions(save_plot = F)
 
 
 ####--SAMPLE 01--####

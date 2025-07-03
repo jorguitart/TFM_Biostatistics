@@ -14,8 +14,7 @@ t0 <- Sys.time()
 
 
 # Normalization
-merged.samples <- loadGiotto(path_to_folder = "./project/material/filtered_samples/merged_sample", 
-                             python_path = "/usr/bin/python36")
+merged.samples <- loadGiotto("./project/material/filtered_samples/merged_sample")
 merged.samples <- normalizeGiotto(merged.samples, norm_methods = "standard"); merged.samples
 
 ## Add statistics

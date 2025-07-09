@@ -1560,9 +1560,9 @@ ggsave("./project/outcomes/qc/ms12_metrics.jpg", plot = s18.metric.plots,
 s.list <- list(s01.filtered, s02.filtered, s03.filtered, s04.filtered, s05.filtered, s06.filtered, 
                s08.filtered, s09.filtered, s11.filtered, s12.filtered, s13.filtered, s14.filtered, 
                s15.filtered, s16.filtered, s17.filtered, s18.filtered)
-names <- c("ctrl01", "ctrl02", "ctrl03", "ctrl04", "ctrl05", "ctrl06", 
-           "msca08", "msca09", "msca11", "msca12", "msca13", "msca14", 
-           "msci15", "msci16", "msci17", "msci18")
+names <- c("CO37", "CO40", "CO41", "CO74", "CO85", "CO96", 
+           "MS197D", "MS197U", "MS377N", "MS377T", "MS377I", "MS411", 
+           "MS497I", "MS497T", "MS549H", "MS549T")
 
 merged.samples <- joinGiottoObjects(gobject_list = s.list, gobject_names = names)
 saveGiotto(merged.samples, foldername = "merged_sample", 

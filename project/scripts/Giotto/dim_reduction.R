@@ -44,6 +44,11 @@ merged.samples <- createNearestNetwork(merged.samples, spat_unit = "cell", feat_
 merged.samples <- doLeidenCluster(merged.samples, name = "leiden_clus", resolution = 0.25)
 
 
+# Markers
+markers <- findMarkers_one_vs_all(merged.samples, method = "scran", expression_values = "normalized", 
+                                  cluster_column = "leiden_clus")
+save(markers, file = "./project/material/marker_genes.rda")
+
 # Plot dim reduction
 ## PCA
 merged.pca <- plotPCA(merged.samples, dim_reduction_name = "pca"); merged.pca

@@ -16,10 +16,11 @@ load("./project/material/DWLS.rds")
 counts <- t(sample@expression$cell$rna$raw@exprMat)
 counts <- as.matrix(counts)
 coord <- sample@spatial_locs$cell$raw@coordinates
+coords <- coord[, -3]; rownames(coords) <- coord$cell_ID
 
 int <- intersect(rownames(counts), DWLS$cell_ID)
 DWLS <- DWLS[cell_ID %in% int]; deconv.mat <- as.matrix(DWLS[, -1])
-rownames(deconv.mat) <- DWLS$cell_ID
+rownames(deconv.mat) <- DWLS$cell_ID; deconv.mat <- deconv.mat[rownames(counts), ]
 
 
-niche.obj <- CreateNicheDEObject(counts, coord, lib.mat, deconv.mat)
+niche.obj <- CreateNicheDEObject(counts, coords, lib.mat, deconv.mat, sigma = c(1, 400, 1000))

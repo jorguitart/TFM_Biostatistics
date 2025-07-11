@@ -11,9 +11,9 @@ setwd("~/TFM")
 ####--DIRs & INSTRUCTIONS--####
 #Directories
 dir <- "./project/material/GSE279181"
-sam <- c("ct01", "ct02", "ct03", "ct04", "ct05", "ct06", 
-         "ms01", "ms02", "ms03", "ms04", "ms05", "ms06", "ms07", "ms08", 
-         "ms09", "ms10", "ms11", "ms12")
+sam <- c("CO37", "CO40", "CO41", "CO74", "CO85", "CO96", 
+         "MS94", "MS197D", "MS197U", "MS229", "MS377N", "MS377T", "MS377I", "MS411", 
+         "MS497I", "MS497T", "MS549H", "MS549T")
 sample.path <- file.path(dir, sam); rm(dir, sam)
 
 # Giotto instructions

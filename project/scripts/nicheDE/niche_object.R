@@ -23,4 +23,9 @@ DWLS <- DWLS[cell_ID %in% int]; deconv.mat <- as.matrix(DWLS[, -1])
 rownames(deconv.mat) <- DWLS$cell_ID; deconv.mat <- deconv.mat[rownames(counts), ]
 
 
-niche.obj <- CreateNicheDEObject(counts, coords, lib.mat, deconv.mat, sigma = c(1, 400, 1000))
+niche.obj <- CreateNicheDEObject(counts, coords, lib.mat, deconv.mat, sigma = c(1, 100, 400))
+
+niche.obj <- CalculateEffectiveNicheLargeScale(niche.obj)
+
+niche.obj <- niche_DE(niche.obj, num_cores = 10, outfile = "./project/material/nicheDE_track.out")
+save(niche.obj, file = "./project/material/niche_obj.RData")

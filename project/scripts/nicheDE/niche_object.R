@@ -27,5 +27,5 @@ niche.obj <- CreateNicheDEObject(counts, coords, lib.mat, deconv.mat, sigma = c(
 
 niche.obj <- CalculateEffectiveNicheLargeScale(niche.obj)
 
-niche.obj <- niche_DE(niche.obj, num_cores = 10, outfile = "./project/material/nicheDE_track.out")
+niche.obj <- niche_DE(niche.obj, num_cores = 64, outfile = "./project/material/nicheDE_track2.out")
 save(niche.obj, file = "./project/material/niche_obj.RData")

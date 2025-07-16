@@ -26,7 +26,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   message("Creating HMRF object...")
   saveGiotto(sample, foldername = "preinit_sample", dir = "./project/material/filtered_samples", overwrite = T)
   sample.hmrf <- initHMRF_V2(sample, use_spatial_genes = "binSpect", gene_list_from_top = 500, use_pca = F,
-                             gene_samples = 500, gene_sampling_rate = 1, hmrf_seed = 100, k = 13,
+                             gene_samples = 500, gene_sampling_rate = 1, hmrf_seed = 100, k = 9,
                              spatial_network_name = "spat_network", cl.method = "km")
   
   message("Saving environment image...")
@@ -38,10 +38,10 @@ if(!file.exists("./project/material/preHMRF.RData")) {
 sample <- loadGiotto("./project/material/filtered_samples/preinit_sample")
 load("./project/material/preHMRF.RData")
 
-HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(0, 5, 5))
+HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(0, 5, 4))
 save(HMRF.model, file = "./project/material/HMRF.RData")
 
-prob <- HMRF.model$`k=13 b=15.00`$prob
+prob <- HMRF.model$`k=9 b=15.00`$prob
 assigned <- apply(prob, 1, which.max)
 assigned <- assigned[sample@cell_ID$cell]
 

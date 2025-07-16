@@ -38,7 +38,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
 sample <- loadGiotto("./project/material/filtered_samples/preinit_sample")
 load("./project/material/preHMRF.RData")
 
-HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(0, 5, 4))
+HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(0, 5, 5))
 save(HMRF.model, file = "./project/material/HMRF.RData")
 
 prob <- HMRF.model$`k=13 b=15.00`$prob

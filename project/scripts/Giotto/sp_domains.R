@@ -26,7 +26,7 @@ if(!file.exists("./project/material/preHMRF.RData")) {
   message("Creating HMRF object...")
   saveGiotto(sample, foldername = "preinit_sample", dir = "./project/material/filtered_samples", overwrite = T)
   sample.hmrf <- initHMRF_V2(sample, use_spatial_genes = "binSpect", gene_list_from_top = 500, use_pca = F,
-                             gene_samples = 500, gene_sampling_rate = 1, hmrf_seed = 100, k = 9,
+                             gene_samples = 500, gene_sampling_rate = 1, hmrf_seed = 100, k = 13,
                              spatial_network_name = "spat_network", cl.method = "km")
   
   message("Saving environment image...")
@@ -37,11 +37,28 @@ if(!file.exists("./project/material/preHMRF.RData")) {
 # Run HMRF model
 sample <- loadGiotto("./project/material/filtered_samples/preinit_sample")
 load("./project/material/preHMRF.RData")
+
 HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(0, 5, 4))
 save(HMRF.model, file = "./project/material/HMRF.RData")
-prob <- HMRF.model$`k=9 b=15.00`$prob
+
+prob <- HMRF.model$`k=13 b=15.00`$prob
 assigned <- apply(prob, 1, which.max)
-sample <- addCellMetadata(sample, new_metadata = as.numeric(assigned),vector_name = "HMRF_B15")
+assigned <- assigned[sample@cell_ID$cell]
+
+sample <- addCellMetadata(sample, new_metadata = as.numeric(assigned), 
+                          vector_name = "HMRF_B15")
+
+spatPlot2D(sample, group_by = "list_ID", cell_color = "HMRF_B15", 
+           point_shape = "no_border", point_size = 1.2)
+
 saveGiotto(sample, foldername = "resolved_sample", 
            dir = "./project/material/filtered_samples", overwrite = T)
+
+# cell.meta <- pDataDT(sample)
+# cell.meta$domain <- with(
+#   cell.meta,
+#   ifelse(HMRF_B15 %in% c(2, 9) $ type == "CTRL", "WM",
+#          ifelse(HMRF_B15 %in% ))
+# )
+
 message("Done."); t1 <- Sys.time() - t0; t1

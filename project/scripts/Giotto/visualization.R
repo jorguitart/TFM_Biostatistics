@@ -9,9 +9,8 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 setwd("~/TFM")
 
 ####--DATA--####
-sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/resolved_sample")#, 
+sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/resolved_sample",
                      python_path = "C:/ProgramData/anaconda3/python.exe")
 
-spatPlot2D(sample, group_by = "list_ID", cell_color "HMRF_b15", point_shape = "no_border")
-
+spatPlot2D(sample, group_by = "list_ID", cell_color = "HMRF_B15", point_shape = "no_border")
 

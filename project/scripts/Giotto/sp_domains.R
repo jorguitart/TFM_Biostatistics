@@ -51,15 +51,29 @@ sample <- addCellMetadata(sample, new_metadata = as.numeric(assigned),
 spatPlot2D(sample, group_by = "list_ID", cell_color = "HMRF_B15", 
            point_shape = "no_border", point_size = 1.2)
 
-saveGiotto(sample, foldername = "resolved_sample", 
-           dir = "./project/material/filtered_samples", overwrite = T)
-
 cell.meta <- pDataDT(sample)
 cell.meta$domain <- with(
   cell.meta,
-  ifelse(HMRF_B15 %in% c(2, 4, 9) $ type == "CTRL", "WM",
-         ifelse(HMRF_B15 %in% c(1, 6) $ type == "CTRL", "GM",
-                ifelse()))
-)
+  ifelse(HMRF_B15 %in% c(2, 4, 9) & type == "CTRL", "WM",
+         ifelse(HMRF_B15 %in% c(1, 6) & type == "CTRL", "GM",
+                ifelse(HMRF_B15 %in% 3 & type ==  "MSCA", "LC",
+                       ifelse(HMRF_B15 %in% 6 & type == "MSCA", "GM",
+                              ifelse(HMRF_B15 %in% c(1, 5) & type == "MSCA", "LR",
+                                     ifelse(HMRF_B15 %in% 7 & type == "MSCA", "PPWM",
+                                            ifelse(HMRF_B15 %in% 4 & type == "MSCA", "VI",
+                                                   ifelse(HMRF_B15 %in% c(3, 4) & type == "MSCI", "LC",
+                                                          ifelse(HMRF_B15 %in% c(1, 8) & type == "MSCI", "GM",
+                                                                 ifelse(HMRF_B15 %in% c(5, 9) & type == "MSCI", "VI",
+                                                                        ifelse(HMRF_B15 %in% c(2, 6) & type == "MSCI", "PPWM",
+                                                                               ifelse(HMRF_B15 %in% 7 & type == "MSCI", "LR", NA)))))))))))))
+
+cell.meta <- createCellMetaObj(cell.meta)
+sample <- setCellMetadata(sample, x = cell.meta)
+
+spatPlot2D(sample, group_by = "list_ID", cell_color = "domain", 
+           point_shape = "no_border", point_size = 1.2)
+
+saveGiotto(sample, foldername = "resolved_sample", 
+           dir = "./project/material/filtered_samples", overwrite = T)
 
 message("Done."); t1 <- Sys.time() - t0; t1

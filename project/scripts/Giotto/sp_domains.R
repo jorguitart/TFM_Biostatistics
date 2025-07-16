@@ -54,11 +54,12 @@ spatPlot2D(sample, group_by = "list_ID", cell_color = "HMRF_B15",
 saveGiotto(sample, foldername = "resolved_sample", 
            dir = "./project/material/filtered_samples", overwrite = T)
 
-# cell.meta <- pDataDT(sample)
-# cell.meta$domain <- with(
-#   cell.meta,
-#   ifelse(HMRF_B15 %in% c(2, 9) $ type == "CTRL", "WM",
-#          ifelse(HMRF_B15 %in% ))
-# )
+cell.meta <- pDataDT(sample)
+cell.meta$domain <- with(
+  cell.meta,
+  ifelse(HMRF_B15 %in% c(2, 4, 9) $ type == "CTRL", "WM",
+         ifelse(HMRF_B15 %in% c(1, 6) $ type == "CTRL", "GM",
+                ifelse()))
+)
 
 message("Done."); t1 <- Sys.time() - t0; t1

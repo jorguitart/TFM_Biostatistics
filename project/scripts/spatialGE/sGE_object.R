@@ -10,10 +10,11 @@ setwd("~/TFM")
 
 dir <- "./project/material/GSE279181"
 sam <- c("CO37", "CO40", "CO41", "CO74", "CO85", "CO96", 
-         "MS94", "MS197D", "MS197U", "MS229", "MS377N", "MS377T", "MS377I", "MS411", 
+         "MS197D", "MS197U", "MS377N", "MS377T", "MS377I", "MS411", 
          "MS497I", "MS497T", "MS549H", "MS549T")
 sample.path <- file.path(dir, sam)
 
-
 sGE.obj <- STlist(rnacounts = sample.path, samples = sam)
+sGE.obj <- filter_data(sGE.obj, spot_mingenes = 125, gene_minspots = 28)
+sGE.obj <- transform_data(sGE.obj, scale_f = 6000)
 save(sGE.obj, file = "./project/material/sGEobject.RData")

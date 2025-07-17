@@ -11,5 +11,5 @@ setwd("~/TFM")
 ####--DATA--####
 load("./project/material/spatialGE/sGEobject.RData")
 
-sGE.obj <- STclust(sGE.obj, ws = 0.5, topgenes = 500)
+sGE.obj <- STclust(sGE.obj, ws = 0.5, topgenes = 500, cores = 10)
 save(sGE.obj, file = "./project/material/spatialGE/sGEclust.RData")

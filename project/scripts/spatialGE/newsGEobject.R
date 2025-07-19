@@ -26,4 +26,5 @@ rna <- list(sample = counts)
 spot <- list(sample = spotcoords)
 
 sGE.obj <- STlist(rnacounts = rna, spotcoords = spot)
+sGE.obj <- transform_data(sGE.obj, scale_f = 6000)
 save(sGE.obj, file = "./project/material/spatialGE/newsGEobject.RData")

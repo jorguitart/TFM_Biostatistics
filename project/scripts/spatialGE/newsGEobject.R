@@ -19,7 +19,7 @@ names.counts <- gsub("\\.", "-", colnames(counts)[-1])
 colnames(counts) <- c("genes", names.counts)
 
 spotcoords <- as.data.frame(sample@spatial_locs$cell$raw@coordinates)
-spotcoords <- spotcoords[, c(3, 1, 2)]; rownames(spotcoords) <- spotcoords$cell_ID
+spotcoords <- spotcoords[, c(3, 2, 1)]; rownames(spotcoords) <- spotcoords$cell_ID
 spotcoords <- spotcoords[colnames(counts[, -1]), ]
 
 rna <- list(sample = counts)

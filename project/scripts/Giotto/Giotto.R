@@ -59,7 +59,6 @@ sample <- binSpect(sample, expression_values = "normalized", bin_method = "kmean
 
 ## HMRF
 message("Creating HMRF object...")
-saveGiotto(sample, foldername = "preinit_sample", dir = "./project/material/filtered_samples", overwrite = T)
 sample.hmrf <- initHMRF_V2(sample, use_spatial_genes = "binSpect", gene_list_from_top = 500, use_pca = F,
                            gene_samples = 500, gene_sampling_rate = 1, hmrf_seed = 100, k = 9,
                            spatial_network_name = "spat_network", cl.method = "km")

@@ -1,7 +1,7 @@
 ####--LIBRARIES--####
 library(tidyverse)
 library(ggpubr)
-library(Giotto) #pak::pkg_install("drieslab/Giotto")
+# library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = FALSE)
 # library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
@@ -9,21 +9,13 @@ library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 setwd("~/TFM")
 
 ####--DATA--####
-sample <- loadGiotto("./project/material/Giotto/resolved_sample",
-                     python_path = "C:/ProgramData/anaconda3/python.exe")
+dir <- "./project/material/GSE279181"
+sam <- c("CO37", "CO40", "CO41", "CO74", "CO85", "CO96", 
+         "MS197D", "MS197U", "MS377N", "MS377T", "MS377I", "MS411", 
+         "MS497I", "MS497T", "MS549H", "MS549T")
+sample.path <- file.path(dir, sam)
 
-rnacounts <- as.data.frame(as.matrix(sample@expression$cell$rna$raw@exprMat))
-counts <- rnacounts
-counts <- data.frame(genes = rownames(counts), counts)
-names.counts <- gsub("\\.", "-", colnames(counts)[-1])
-colnames(counts) <- c("genes", names.counts)
-
-spotcoords <- as.data.frame(sample@spatial_locs$cell$raw@coordinates)
-spotcoords <- spotcoords[, c(3, 2, 1)]
-spotcoords <- spotcoords[spotcoords$cell_ID == colnames(counts[, -1]), ]
-
-rna <- list(sample = counts)
-spot <- list(sample = spotcoords)
-
-sGE.obj <- STlist(rnacounts = rna, spotcoords = spot)
-save(sGE.obj, file = "./project/material/spatialGE/sGEobject.RData")
+sGE.obj <- STlist(rnacounts = sample.path, samples = sam)
+sGE.obj <- filter_data(sGE.obj, spot_mingenes = 125, gene_minspots = 28)
+sGE.obj <- transform_data(sGE.obj, scale_f = 6000)
+save(sGE.obj, file = "./project/material/spatialGE/newsGEobject.RData")

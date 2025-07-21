@@ -1566,4 +1566,4 @@ names <- c("CO37", "CO40", "CO41", "CO74", "CO85",
 
 merged.samples <- joinGiottoObjects(gobject_list = s.list, gobject_names = names)
 saveGiotto(merged.samples, foldername = "merged_sample", 
-           dir = "./project/material/filtered_samples", overwrite = T)
+           dir = "./project/material/Giotto", overwrite = T)

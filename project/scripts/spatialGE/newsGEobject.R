@@ -9,7 +9,7 @@ library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 setwd("~/TFM")
 
 ####--DATA--####
-sample <- loadGiotto("./project/material/filtered_samples/resolved_sample",
+sample <- loadGiotto("./project/material/Giotto/resolved_sample",
                      python_path = "C:/ProgramData/anaconda3/python.exe")
 
 rnacounts <- as.data.frame(as.matrix(sample@expression$cell$rna$raw@exprMat))
@@ -26,5 +26,4 @@ rna <- list(sample = counts)
 spot <- list(sample = spotcoords)
 
 sGE.obj <- STlist(rnacounts = rna, spotcoords = spot)
-sGE.obj <- transform_data(sGE.obj, scale_f = 6000)
-save(sGE.obj, file = "./project/material/spatialGE/newsGEobject.RData")
+save(sGE.obj, file = "./project/material/spatialGE/sGEobject.RData")

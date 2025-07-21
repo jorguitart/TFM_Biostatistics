@@ -1541,28 +1541,28 @@ ggsave("./project/outcomes/qc/ms12_metrics.jpg", plot = s18.metric.plots,
 (length(s03@cell_ID$cell) - length(s03.filtered@cell_ID$cell)) / length(s03@cell_ID$cell)
 (length(s04@cell_ID$cell) - length(s04.filtered@cell_ID$cell)) / length(s04@cell_ID$cell)
 (length(s05@cell_ID$cell) - length(s05.filtered@cell_ID$cell)) / length(s05@cell_ID$cell)
-(length(s06@cell_ID$cell) - length(s06.filtered@cell_ID$cell)) / length(s06@cell_ID$cell)
+(length(s06@cell_ID$cell) - length(s06.filtered@cell_ID$cell)) / length(s06@cell_ID$cell) # DELETE
 (length(s07@cell_ID$cell) - length(s07.filtered@cell_ID$cell)) / length(s07@cell_ID$cell) # DELETE
 (length(s08@cell_ID$cell) - length(s08.filtered@cell_ID$cell)) / length(s08@cell_ID$cell)
 (length(s09@cell_ID$cell) - length(s09.filtered@cell_ID$cell)) / length(s09@cell_ID$cell)
 (length(s10@cell_ID$cell) - length(s10.filtered@cell_ID$cell)) / length(s10@cell_ID$cell) # DELETE
 (length(s11@cell_ID$cell) - length(s11.filtered@cell_ID$cell)) / length(s11@cell_ID$cell)
 (length(s12@cell_ID$cell) - length(s12.filtered@cell_ID$cell)) / length(s12@cell_ID$cell)
-(length(s13@cell_ID$cell) - length(s13.filtered@cell_ID$cell)) / length(s13@cell_ID$cell)
-(length(s14@cell_ID$cell) - length(s14.filtered@cell_ID$cell)) / length(s14@cell_ID$cell)
-(length(s15@cell_ID$cell) - length(s15.filtered@cell_ID$cell)) / length(s15@cell_ID$cell)
+(length(s13@cell_ID$cell) - length(s13.filtered@cell_ID$cell)) / length(s13@cell_ID$cell) # DELETE
+(length(s14@cell_ID$cell) - length(s14.filtered@cell_ID$cell)) / length(s14@cell_ID$cell) # DELETE
+(length(s15@cell_ID$cell) - length(s15.filtered@cell_ID$cell)) / length(s15@cell_ID$cell) # DELETE
 (length(s16@cell_ID$cell) - length(s16.filtered@cell_ID$cell)) / length(s16@cell_ID$cell)
 (length(s17@cell_ID$cell) - length(s17.filtered@cell_ID$cell)) / length(s17@cell_ID$cell)
 (length(s18@cell_ID$cell) - length(s18.filtered@cell_ID$cell)) / length(s18@cell_ID$cell)
 
 
 ####--MERGE--####
-s.list <- list(s01.filtered, s02.filtered, s03.filtered, s04.filtered, s05.filtered, s06.filtered, 
-               s08.filtered, s09.filtered, s11.filtered, s12.filtered, s13.filtered, s14.filtered, 
-               s15.filtered, s16.filtered, s17.filtered, s18.filtered)
-names <- c("CO37", "CO40", "CO41", "CO74", "CO85", "CO96", 
-           "MS197D", "MS197U", "MS377N", "MS377T", "MS377I", "MS411", 
-           "MS497I", "MS497T", "MS549H", "MS549T")
+s.list <- list(s01.filtered, s02.filtered, s03.filtered, s04.filtered, s05.filtered, 
+               s08.filtered, s09.filtered, s11.filtered, s12.filtered,
+               s16.filtered, s17.filtered, s18.filtered)
+names <- c("CO37", "CO40", "CO41", "CO74", "CO85",
+           "MS197D", "MS197U", "MS377N", "MS377T",
+           "MS497T", "MS549H", "MS549T")
 
 merged.samples <- joinGiottoObjects(gobject_list = s.list, gobject_names = names)
 saveGiotto(merged.samples, foldername = "merged_sample", 

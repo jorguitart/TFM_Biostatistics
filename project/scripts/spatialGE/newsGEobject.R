@@ -28,6 +28,7 @@ for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
 }
 
 newsGE.obj <- STlist(rnacounts = rnacounts, spotcoords = spotcoords)
+newsGE.obj <- transform_data(newsGE.obj, scale_f = 6000)
 
 # Add metadata
 load("./project/material/spatialGE/sGEclust.RData")

@@ -9,8 +9,7 @@ library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 setwd("~/TFM")
 
 ####--DATA--####
-sample <- loadGiotto("./project/material/Giotto/resolved_sample",
-                     python_path = "C:/ProgramData/anaconda3/python.exe")
+sample <- loadGiotto("./project/material/Giotto/HMRF_sample")
 
 rnacounts <- as.data.frame(as.matrix(sample@expression$cell$rna$raw@exprMat))
 counts <- rnacounts

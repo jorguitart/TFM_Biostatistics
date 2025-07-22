@@ -63,7 +63,7 @@ sp.meta$domain <- with(
                                                                  ifelse(cluster %in% c(3, 8) & type == "MSCI", "LC",
                                                                         ifelse(cluster %in% 2 & type == "MSCI", "LR",
                                                                                ifelse(cluster %in% 4 & type == "MSCI", "PPWM",
-                                                                                      ifelse(cluster %in% c(1, 5, 6 & type == "MSCI", "VI", NA)))))))))))))))
+                                                                                      ifelse(cluster %in% c(1, 5, 6) & type == "MSCI", "VI", NA))))))))))))))
 
 ### Clusters
 clusters <- list()

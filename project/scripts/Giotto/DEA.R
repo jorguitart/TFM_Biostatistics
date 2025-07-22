@@ -5,11 +5,12 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = FALSE)
 # library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 # library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
+library(ggrepel)
 
 setwd("~/TFM")
 
 ####--DATA--####
-sample <- loadGiotto(path_to_folder = "./project/material/filtered_samples/resolved_sample",
+sample <- loadGiotto(path_to_folder = "./project/material/Giotto/HMRF_sample",
                      python_path = "C:/ProgramData/anaconda3/python.exe")
 
 # Lesion core between conditions (Inactive VS Active)
@@ -75,6 +76,5 @@ DEA.plot2 <- ggplot(DEA, aes(x = summary.logFC, y = logFDR, color = sig)) +
   geom_vline(xintercept = c(-0.5, 0.5), linetype = "dashed") +
   geom_hline(yintercept = -log10(0.05), linetype = "dashed")
 
-ggsave(plot = DEA.plot2, filename = "./project/outcomes/vis/LCvsPPWM.png", 
+ggsave(plot = DEA.plot2, filename = "./project/outcomes/vis/LCvsPPWM_Giotto.png", 
        width = 1920, height = 1080, units = "px", scale = 2)
-

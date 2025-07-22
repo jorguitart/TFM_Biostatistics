@@ -6,11 +6,11 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
-#setwd("~/TFM")
+setwd("~/TFM")
 
 ####--DATA--####
 # Create STlist
-sample <- loadGiotto("./project/material/Giotto/HMRF_sample", python_path = "C:/ProgramData/anaconda3/python.exe")
+sample <- loadGiotto("./project/material/Giotto/HMRF_sample")
 IDs <- unique(sample@cell_metadata$cell$rna$type)
 samples <- list(); rnacounts <- list(); names.counts <- list(); spotcoords <- list()
 
@@ -35,9 +35,10 @@ load("./project/material/spatialGE/sGEclust.RData")
 
 ## Normalized counts
 tr_counts <- list()
-for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
-  tr_counts[[i]] <- sGE.obj@tr_counts$sample[, grep(i, sGE.obj@tr_counts$sample@Dimnames[[2]])]
-}
+  tr_counts[["CTRL"]] <- sGE.obj@tr_counts$sample[, grep("CO37|CO40|CO41|CO74|CO85", sGE.obj@tr_counts$sample@Dimnames[[2]])]
+  tr_counts[["MSCA"]] <- sGE.obj@tr_counts$sample[, grep("MS197D|MS197U|MS377N|MS377T", sGE.obj@tr_counts$sample@Dimnames[[2]])]
+  tr_counts[["MSCI"]] <- sGE.obj@tr_counts$sample[, grep("MS497T|MS549H|MS549T", sGE.obj@tr_counts$sample@Dimnames[[2]])]
+  
 typesGE.obj@tr_counts <- tr_counts
 
 ## Spatial metadata

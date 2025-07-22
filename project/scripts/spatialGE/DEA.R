@@ -13,7 +13,7 @@ setwd("~/TFM")
 load("./project/material/spatialGE/typesGEobject.RData")
 
 DEA <- STdiff(typesGE.obj, samples = "MSCA", annot = "domain", clusters = c("LC", "PPWM"), 
-              topgenes = NULL, cores = 36)
+              topgenes = NULL, cores = 24)
 
 DEA <- DEA$MSCA
 minim <- min(DEA$adj_p_val[DEA$adj_p_val > 0])

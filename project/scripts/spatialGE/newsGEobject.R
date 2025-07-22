@@ -6,11 +6,11 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
-setwd("~/TFM")
+#setwd("~/TFM")
 
 ####--DATA--####
 # Create STlist
-sample <- loadGiotto("./project/material/Giotto/HMRF_sample")
+sample <- loadGiotto("./project/material/Giotto/HMRF_sample", python_path = "C:/ProgramData/anaconda3/python.exe")
 
 samples <- list(); rnacounts <- list(); names.counts <- list(); spotcoords <- list()
 

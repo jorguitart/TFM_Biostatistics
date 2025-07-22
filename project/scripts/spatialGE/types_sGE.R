@@ -86,5 +86,3 @@ for (i in IDs) {
 }
 
 save(typesGE.obj, file = "./project/material/spatialGE/typesGEobject.RData")
-
-

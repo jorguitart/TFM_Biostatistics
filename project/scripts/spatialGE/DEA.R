@@ -9,9 +9,9 @@ library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 setwd("~/TFM")
 
 ####--DATA--####
-load("./project/material/spatialGE/newsGEobject.RData")
+load("./project/material/spatialGE/typesGEobject.RData")
 
-DEA <- STdiff(newsGE.obj, samples = c("MS377N", "MS549H"), annot = "domain", clusters = c("LC", "LR"),
-              topgenes = 500, test_type = "mm", cores = 12)
+DEA <- STdiff(typesGE.obj, samples = "MSCA", annot = "domain", clusters = c("LC", "PPWM"),
+              topgenes = 500, test_type = "t_test", cores = 12)
 
 save(DEA, file = "./project/material/spatialGE/DEA.RData")

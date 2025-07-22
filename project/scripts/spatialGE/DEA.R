@@ -6,7 +6,7 @@ library(ggpubr)
 # library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
-#setwd("~/TFM")
+setwd("~/TFM")
 
 ####--DATA--####
 load("./project/material/spatialGE/newsGEobject.RData")

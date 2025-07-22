@@ -7,7 +7,7 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 library(ggrepel)
 
-setwd("~/TFM")
+#setwd("~/TFM")
 
 ####--DATA--####
 sample <- loadGiotto(path_to_folder = "./project/material/Giotto/HMRF_sample",
@@ -66,6 +66,7 @@ names(colors) <- DEA$feats
 DEA$sig <- colors
 DEA$label <- ifelse(DEA$sig %in% c("under", "over"), DEA$feats, NA)
 
+save(DEA, file = "./project/material/Giotto/DEA.RData")
 
 DEA.plot2 <- ggplot(DEA, aes(x = summary.logFC, y = logFDR, color = sig)) +
   geom_point(alpha = 0.8) +

@@ -6,11 +6,12 @@ library(Giotto) #pak::pkg_install("drieslab/Giotto")
 # library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
 library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
-setwd("~/TFM")
+#setwd("~/TFM")
 
 ####--DATA--####
 # Create STlist
-sample <- loadGiotto("./project/material/Giotto/HMRF_sample")
+sample <- loadGiotto("./project/material/Giotto/HMRF_sample", 
+                     python_path = "C:/ProgramData/anaconda3/python.exe")
 
 samples <- list(); rnacounts <- list(); names.counts <- list(); spotcoords <- list()
 
@@ -41,7 +42,7 @@ newsGE.obj@tr_counts <- tr_counts
 
 ## Domains
 sp.meta <- sGE.obj@spatial_meta$sample
-names(sp.meta)[names(sp.meta) == "stclust_spw0.5_dsplFalse"] <- "cluster"
+names(sp.meta)[names(sp.meta) == "stclust_spw0.025_dsplFalse"] <- "cluster"
 
 clusters <- list()
 for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {

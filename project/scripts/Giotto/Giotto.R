@@ -67,6 +67,34 @@ sample.hmrf <- initHMRF_V2(sample, use_spatial_genes = "binSpect", gene_list_fro
 message("Running HMRF...")
 HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(0, 5, 5))
 
+prob <- HMRF.model$`k=9 b=20.00`$prob
+assigned <- apply(prob, 1, which.max)
+assigned <- assigned[sample@cell_ID$cell]
+
+sample <- addCellMetadata(sample, new_metadata = as.numeric(assigned), 
+                          vector_name = "HMRF_B20")
+
+cell.meta <- pDataDT(sample)
+cell.meta$domain <- with(
+  cell.meta,
+  ifelse(HMRF_B20 %in% c(3, 5, 7, 8) & type == "CTRL", "WM",
+         ifelse(HMRF_B20 %in% 9 & type == "CTRL", "GM",
+                ifelse(HMRF_B20 %in% 4 & type == "MSCA", "LR",
+                       ifelse(HMRF_B20 %in% 6 & type == "MSCA", "GM",
+                              ifelse(HMRF_B20 %in% 5 & type == "MSCA", "PPWM",
+                                     ifelse(HMRF_B20 %in% c(1, 2) & type == "MSCA", "LC",
+                                            ifelse(HMRF_B20 %in% c(8, 9) & type == "MSCA", "VI",
+                                                   ifelse(HMRF_B20 %in% c(1, 8) & type == "MSCI", "LC",
+                                                          ifelse(HMRF_B20 %in% 6 & type == "MSCI", "GM",
+                                                                 ifelse(HMRF_B20 %in% 5 & type == "MSCI", "LR",
+                                                                        ifelse(HMRF_B20 %in% 2 & type == "MSCI", "GM",
+                                                                               ifelse(HMRF_B20 %in% 7 & type == "MSCI", "VI",
+                                                                                      ifelse(HMRF_B20 %in% c(3, 9) & type == "MSCI", "PPWM", NA))))))))))))))
+
+
+cell.meta <- createCellMetaObj(cell.meta)
+sample <- setCellMetadata(sample, x = cell.meta)
+
 message("Done. Time: "); t1 <- Sys.time() - t0; t1
 
 message("Saving gobject...")

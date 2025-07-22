@@ -40,10 +40,32 @@ for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
 }
 newsGE.obj@tr_counts <- tr_counts
 
-## Domains
+## Spatial metadata
 sp.meta <- sGE.obj@spatial_meta$sample
 names(sp.meta)[names(sp.meta) == "stclust_spw0.025_dsplFalse"] <- "cluster"
 
+sp.meta$type <- with(
+  sp.meta,
+  ifelse(libname %in% sp.meta$libname[grep("CO37|CO40|CO41|CO74|CO85", libname)], "CTRL", 
+         ifelse(libname %in% sp.meta$libname[grep("MS497T|MS549H|MS549T", libname)], "MSCI", "MSCA")))
+
+sp.meta$domain <- with(
+  sp.meta,
+  ifelse(cluster %in% c(1, 2, 3, 4, 5, 6, 7, 9) & type == "CTRL", "WM",
+         ifelse(cluster %in% 8 & type == "CTRL", "GM",
+                ifelse(cluster %in% c(1, 3, 4) & type == "MSCA", "VI",
+                       ifelse(cluster %in% 2 & type == "MSCA", "LC",
+                              ifelse(cluster %in% 6 & type == "MSCA", "PPWM",
+                                     ifelse(cluster %in% 5 & type == "MSCA", "LC",
+                                            ifelse(cluster %in% 7 & type == "MSCA", "LR",
+                                                   ifelse(cluster %in% c(8, 9) & type == "MSCA", "GM", 
+                                                          ifelse(cluster %in% 9 & type == "MSCI", "GM",
+                                                                 ifelse(cluster %in% c(3, 8) & type == "MSCI", "LC",
+                                                                        ifelse(cluster %in% 2 & type == "MSCI", "LR",
+                                                                               ifelse(cluster %in% 4 & type == "MSCI", "PPWM",
+                                                                                      ifelse(cluster %in% c(1, 5, 6 & type == "MSCI", "VI", NA)))))))))))))))
+
+### Clusters
 clusters <- list()
 for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
   clusters[[i]] <- sp.meta$cluster[grep(i, sp.meta$libname)]
@@ -51,6 +73,26 @@ for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
 
 for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
   newsGE.obj@spatial_meta[[i]][["cluster"]] <- clusters[[i]]
+}
+
+### Sample types
+types <- list()
+for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
+  types[[i]] <- sp.meta$type[grep(i, sp.meta$libname)]
+}
+
+for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
+  newsGE.obj@spatial_meta[[i]][["type"]] <- types[[i]]
+}
+
+### Spatial domains
+domains <- list()
+for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
+  domains[[i]] <- sp.meta$domain[grep(i, sp.meta$libname)]
+}
+
+for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
+  newsGE.obj@spatial_meta[[i]][["domain"]] <- domains[[i]]
 }
 
 ## Sample type

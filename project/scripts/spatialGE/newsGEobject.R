@@ -56,4 +56,4 @@ for (i in unique(sample@cell_metadata$cell$rna$list_ID)) {
 sample_type <- c(rep("CTRL", 5), rep("MSCA", 4), rep("MSCI", 3))
 newsGE.obj@sample_meta$sample_type <- sample_type
 
-save(sGE.obj, file = "./project/material/spatialGE/newsGEobject.RData")
+save(newsGE.obj, file = "./project/material/spatialGE/newsGEobject.RData")

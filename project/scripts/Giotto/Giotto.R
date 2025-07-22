@@ -70,8 +70,8 @@ HMRF.model <- doHMRF_V2(sample.hmrf, betas = c(0, 5, 5))
 message("Done. Time: "); t1 <- Sys.time() - t0; t1
 
 message("Saving gobject...")
-save(HMRF.model, file = "./project/material/HMRF.RData")
-saveGiotto(sample, foldername = "inited_sample", 
+save(HMRF.model, file = "./project/material/Giotto/HMRF.RData")
+saveGiotto(sample, foldername = "HMRF_sample", 
            dir = "./project/material/Giotto", overwrite = T)
 
 message("Done.")

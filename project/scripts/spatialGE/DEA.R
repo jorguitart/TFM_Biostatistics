@@ -13,23 +13,29 @@ setwd("~/TFM")
 load("./project/material/spatialGE/typesGEobject.RData")
 
 DEA.t <- STdiff(typesGE.obj, samples = "MSCA", annot = "domain", clusters = c("LC", "PPWM"), 
-                topgenes = 11534, test_type = "t_test", cores = 24)
+                topgenes = 5000, test_type = "t_test", cores = 24)
 DEA.t500 <- STdiff(typesGE.obj, samples = "MSCA", annot = "domain", clusters = c("LC", "PPWM"), 
                 topgenes = 500, test_type = "t_test", cores = 24)
 
+save(DEA.t, file = "./project/material/spatialGE/DEAt.RData")
+save(DEA.t500, file = "./project/material/spatialGE/DEAt500.RData")
+message("DEA t-test saved.")
+
 DEA.w <- STdiff(typesGE.obj, samples = "MSCA", annot = "domain", clusters = c("LC", "PPWM"), 
-                topgenes = 11534, test_type = "wilcoxon", cores = 24)
+                topgenes = 5000, test_type = "wilcoxon", cores = 24)
 DEA.w500 <- STdiff(typesGE.obj, samples = "MSCA", annot = "domain", clusters = c("LC", "PPWM"), 
                 topgenes = 500, test_type = "wilcoxon", cores = 24)
+
+save(DEA.w, file = "./project/material/spatialGE/DEAw.RData")
+save(DEA.w500, file = "./project/material/spatialGE/DEAw500.RData")
+message("DEA Wilcoxon test saved.")
 
 DEA.mm <- STdiff(typesGE.obj, samples = "MSCA", annot = "domain", clusters = c("LC", "PPWM"), 
                  topgenes = 500, test_type = "mm", cores = 24)
 
-save(DEA.t, file = "./project/material/spatialGE/DEAt.RData")
-save(DEA.t500, file = "./project/material/spatialGE/DEAt500.RData")
-save(DEA.w, file = "./project/material/spatialGE/DEAw.RData")
-save(DEA.w500, file = "./project/material/spatialGE/DEAw500.RData")
 save(DEA.mm, file = "./project/material/spatialGE/DEAmm.RData")
+message("DEA mixed models test saved.")
+message("Done.")
 
 # DEA <- 
 # 

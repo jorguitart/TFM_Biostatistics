@@ -21,4 +21,4 @@ celltypes <- data.frame(colnames.refr. = rownames(cell.meta), Idents.refr. = cel
 rownames(celltypes) <- celltypes$colnames.refr.
 
 lib.mat <- CreateLibraryMatrix(expr.mat, celltypes)
-save(lib.mat, file = "./project/material/library.RData")
+save(lib.mat, file = "./project/material/nicheDE/library.RData")

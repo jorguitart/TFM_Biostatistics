@@ -2,16 +2,14 @@
 library(tidyverse)
 library(ggpubr)
 library(Giotto) #pak::pkg_install("drieslab/Giotto")
-# library(spacexr) #devtools::install_github("dmcable/spacexr", build_vignettes = FALSE)
 library(nicheDE) #devtools::install_github("kaishumason/NicheDE")
-# library(spatialGE) #devtools::install_github("fridleylab/spatialGE")
 
 setwd("~/TFM")
 
 ####--SAMPLE--####
-sample <- loadGiotto("./project/material/filtered_samples/preinit_sample")
-load("./project/material/library.RData")
-load("./project/material/DWLS.rds")
+sample <- loadGiotto("./project/material/Giotto/HMRF_sample")
+load("./project/material/nicheDE/library.RData")
+load("./project/material/nicheDE/DWLS.rds")
 
 counts <- t(sample@expression$cell$rna$raw@exprMat)
 counts <- as.matrix(counts)
@@ -27,5 +25,8 @@ niche.obj <- CreateNicheDEObject(counts, coords, lib.mat, deconv.mat, sigma = c(
 
 niche.obj <- CalculateEffectiveNicheLargeScale(niche.obj)
 
+save(niche.obj, file = "./project/material/nicheDE/nicheObj.RData")
+
+message("Starting niche-DE calculation...")
 niche.obj <- niche_DE(niche.obj, num_cores = 64, outfile = "./project/material/nicheDE_track2.out")
-save(niche.obj, file = "./project/material/niche_obj.RData")
+save(niche.obj, file = "./project/material/nicheDE/nicheObj.RData")
